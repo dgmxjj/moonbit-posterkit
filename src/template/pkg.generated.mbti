@@ -1,0 +1,32 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/template"
+
+import {
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/scene",
+  "dgmxjj/moonbit-posterkit/theme",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+// Values
+pub fn render_template(template~ : String, preset~ : @preset.PosterPreset, theme~ : @theme.Theme, content~ : TemplateContent) -> @scene.PosterDocument
+
+// Errors
+
+// Types and methods
+pub(all) struct TemplateContent {
+  eyebrow : String
+  title : String
+  subtitle : String
+  body : String
+  cta : String
+  footer : String
+  image_label : String
+  image_asset_id : String
+} derive(Eq, ToJson, @debug.Debug, @json.FromJson)
+
+// Type aliases
+
+// Traits
+

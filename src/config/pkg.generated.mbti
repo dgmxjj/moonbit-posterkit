@@ -1,0 +1,58 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/config"
+
+import {
+  "dgmxjj/moonbit-posterkit/template",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+// Values
+pub fn parse_batch(String) -> Result[BatchJob, ConfigError]
+
+pub fn render_batch(BatchJob) -> Result[Array[RenderedPoster], ConfigError]
+
+pub fn render_job(PosterJob) -> Result[RenderedPoster, ConfigError]
+
+pub fn validate_batch(BatchJob) -> Result[ValidationSummary, ConfigError]
+
+// Errors
+
+// Types and methods
+pub(all) struct BatchJob {
+  jobs : Array[PosterJob]
+} derive(Eq, ToJson, @debug.Debug, @json.FromJson)
+
+pub(all) enum ConfigError {
+  InvalidJson(message~ : String)
+  UnknownPreset(name~ : String)
+  UnknownTheme(name~ : String)
+  UnknownTemplate(name~ : String)
+  DuplicateSlug(name~ : String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PosterJob {
+  slug : String
+  template : String
+  preset : String
+  theme : String
+  content : @template.TemplateContent
+} derive(Eq, ToJson, @debug.Debug, @json.FromJson)
+
+pub(all) struct RenderedPoster {
+  slug : String
+  svg : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ValidationSummary {
+  total_jobs : Int
+  slugs : Array[String]
+  templates : Array[String]
+  presets : Array[String]
+  themes : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

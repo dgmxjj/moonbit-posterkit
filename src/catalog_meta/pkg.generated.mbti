@@ -1,0 +1,33 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/catalog_meta"
+
+import {
+  "dgmxjj/moonbit-posterkit/catalog",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn list_packs() -> Array[PackInfo]
+
+pub fn pack_names() -> Array[String]
+
+pub fn resolve_pack(String) -> @catalog.CampaignPack?
+
+pub fn resolve_pack_info(String) -> PackInfo?
+
+// Errors
+
+// Types and methods
+pub(all) struct PackInfo {
+  name : String
+  summary : String
+  jobs : Int
+  templates : Array[String]
+  presets : Array[String]
+  themes : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

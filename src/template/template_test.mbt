@@ -1,3 +1,4 @@
+///|
 fn demo_content() -> TemplateContent {
   {
     eyebrow: "MoonBit Hackathon 2026",
@@ -11,14 +12,17 @@ fn demo_content() -> TemplateContent {
   }
 }
 
+///|
 fn has_image_slot(document : @scene.PosterDocument, asset_id : String) -> Bool {
-  document.elements.any(element =>
+  document.elements.any(element => {
     match element {
       @scene.Element::ImageSlot(asset_id=id, ..) => id == asset_id
       _ => false
-    })
+    }
+  })
 }
 
+///|
 test "launch template creates a reusable social poster" {
   let document = render_template(
     template="launch",
@@ -31,6 +35,7 @@ test "launch template creates a reusable social poster" {
   inspect(has_image_slot(document, "cover-art"), content="true")
 }
 
+///|
 test "editorial template supports swiss-grid stories" {
   let document = render_template(
     template="editorial",
@@ -43,6 +48,7 @@ test "editorial template supports swiss-grid stories" {
   inspect(has_image_slot(document, "cover-art"), content="true")
 }
 
+///|
 test "event template places operational details into the footer zone" {
   let document = render_template(
     template="event",
@@ -50,6 +56,31 @@ test "event template places operational details into the footer zone" {
     theme=@theme.Theme::warm_editorial(),
     content=demo_content(),
   )
+  inspect(document.elements.length() >= 7, content="true")
+  inspect(has_image_slot(document, "cover-art"), content="true")
+}
+
+///|
+test "quote template supports speaker portraits and long-form quotations" {
+  let document = render_template(
+    template="quote",
+    preset=@preset.PosterPreset::instagram_square(),
+    theme=@theme.Theme::warm_editorial(),
+    content=demo_content(),
+  )
+  inspect(document.elements.length() >= 7, content="true")
+  inspect(has_image_slot(document, "cover-art"), content="true")
+}
+
+///|
+test "digest template supports digest-style recaps and summary cards" {
+  let document = render_template(
+    template="digest",
+    preset=@preset.PosterPreset::youtube_thumbnail(),
+    theme=@theme.Theme::swiss_grid(),
+    content=demo_content(),
+  )
+  inspect(document.preset.name, content="youtube-thumbnail")
   inspect(document.elements.length() >= 7, content="true")
   inspect(has_image_slot(document, "cover-art"), content="true")
 }

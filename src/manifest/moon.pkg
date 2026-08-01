@@ -1,0 +1,4 @@
+import {
+  "dgmxjj/moonbit-posterkit/catalog_meta",
+  "dgmxjj/moonbit-posterkit/registry",
+}

@@ -1,0 +1,70 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/registry"
+
+import {
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/theme",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn list_presets() -> Array[PresetInfo]
+
+pub fn list_templates() -> Array[TemplateInfo]
+
+pub fn list_themes() -> Array[ThemeInfo]
+
+pub fn preset_names() -> Array[String]
+
+pub fn resolve_preset(String) -> @preset.PosterPreset?
+
+pub fn resolve_preset_info(String) -> PresetInfo?
+
+pub fn resolve_template_info(String) -> TemplateInfo?
+
+pub fn resolve_template_name(String) -> String?
+
+pub fn resolve_theme(String) -> @theme.Theme?
+
+pub fn resolve_theme_info(String) -> ThemeInfo?
+
+pub fn template_names() -> Array[String]
+
+pub fn theme_names() -> Array[String]
+
+// Errors
+
+// Types and methods
+pub(all) struct PresetInfo {
+  name : String
+  summary : String
+  width : Int
+  height : Int
+  safe_margin : Int
+  aspect_ratio : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct TemplateInfo {
+  name : String
+  summary : String
+  default_preset : String
+  default_theme : String
+  supported_presets : Array[String]
+  supported_themes : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct ThemeInfo {
+  name : String
+  summary : String
+  background : String
+  foreground : String
+  accent : String
+  padding : Int
+  title_size : Int
+  body_size : Int
+} derive(Eq, ToJson, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

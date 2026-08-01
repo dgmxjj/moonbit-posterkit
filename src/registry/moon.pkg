@@ -1,0 +1,4 @@
+import {
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/theme",
+}

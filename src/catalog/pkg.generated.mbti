@@ -1,0 +1,44 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/catalog"
+
+import {
+  "dgmxjj/moonbit-posterkit/config",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn all_packs() -> Array[CampaignPack]
+
+pub fn community_pack() -> CampaignPack
+
+pub fn conference_pack() -> CampaignPack
+
+pub fn education_pack() -> CampaignPack
+
+pub fn flatten_jobs(CampaignPack) -> @config.BatchJob
+
+pub fn hackathon_pack() -> CampaignPack
+
+pub fn product_launch_pack() -> CampaignPack
+
+pub fn quote_story_pack() -> CampaignPack
+
+pub fn release_notes_pack() -> CampaignPack
+
+pub fn social_pack() -> CampaignPack
+
+pub fn weekly_digest_pack() -> CampaignPack
+
+// Errors
+
+// Types and methods
+pub(all) struct CampaignPack {
+  name : String
+  description : String
+  jobs : Array[@config.PosterJob]
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

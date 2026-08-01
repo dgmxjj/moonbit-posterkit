@@ -1,0 +1,33 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/manifest"
+
+import {
+  "dgmxjj/moonbit-posterkit/catalog_meta",
+  "dgmxjj/moonbit-posterkit/registry",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn build_catalog() -> RepositoryCatalog
+
+pub fn catalog_json() -> String
+
+pub fn catalog_markdown() -> String
+
+// Errors
+
+// Types and methods
+pub(all) struct RepositoryCatalog {
+  module_name : String
+  version : String
+  description : String
+  templates : Array[@registry.TemplateInfo]
+  presets : Array[@registry.PresetInfo]
+  themes : Array[@registry.ThemeInfo]
+  packs : Array[@catalog_meta.PackInfo]
+} derive(Eq, ToJson, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
