@@ -31,3 +31,52 @@ test "root facade re-exports layout and textflow helpers" {
     content="2",
   )
 }
+
+test "root facade re-exports built-in templates" {
+  let document = render_template(
+    template="launch",
+    preset=PosterPreset::instagram_square(),
+    theme=Theme::warm_editorial(),
+    content=TemplateContent::{
+      eyebrow: "MoonBit Hackathon 2026",
+      title: "MoonBit PosterKit",
+      subtitle: "Data-driven poster generation DSL",
+      body: "Compose reusable layouts and templates in MoonBit.",
+      cta: "Build once, render everywhere",
+      footer: "mooncakes.io / github",
+      image_label: "Replace Cover Art",
+      image_asset_id: "cover-art",
+    },
+  )
+  inspect(document.elements.length() >= 6, content="true")
+}
+
+test "root facade re-exports config rendering helpers" {
+  let batch = BatchJob::{
+    jobs: [
+      PosterJob::{
+        slug: "launch-square",
+        template: "launch",
+        preset: "instagram-square",
+        theme: "warm-editorial",
+        content: TemplateContent::{
+          eyebrow: "MoonBit Hackathon 2026",
+          title: "MoonBit PosterKit",
+          subtitle: "Data-driven poster generation DSL",
+          body: "Compose reusable layouts and templates in MoonBit.",
+          cta: "Build once, render everywhere",
+          footer: "mooncakes.io / github",
+          image_label: "Replace Cover Art",
+          image_asset_id: "cover-art",
+        },
+      },
+    ],
+  }
+  inspect(
+    match render_batch(batch) {
+      Ok(rendered) => rendered.length()
+      Err(_) => -1
+    },
+    content="1",
+  )
+}

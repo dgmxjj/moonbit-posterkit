@@ -106,3 +106,12 @@ pub fn PosterDocument::push(
   elements.push(element)
   { ..document, elements }
 }
+
+pub fn PosterDocument::push_iter(
+  document : PosterDocument,
+  new_elements : Iter[Element],
+) -> PosterDocument {
+  let elements = document.elements.copy()
+  elements.push_iter(new_elements)
+  { ..document, elements }
+}

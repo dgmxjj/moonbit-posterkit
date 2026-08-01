@@ -39,3 +39,17 @@ pub fn Theme::warm_editorial() -> Theme {
     caption_size: 24,
   }
 }
+
+pub fn Theme::swiss_grid() -> Theme {
+  {
+    name: "swiss-grid",
+    background: Color::hex("#fffdf6"),
+    foreground: Color::hex("#111111"),
+    accent: Color::hex("#0057ff"),
+    muted: Color::hex("#7b7b7b"),
+    padding: @core.EdgeInsets::all(84),
+    title_size: 88,
+    body_size: 32,
+    caption_size: 22,
+  }
+}

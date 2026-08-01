@@ -11,3 +11,11 @@ test "warm editorial theme exposes a readable palette" {
   inspect(theme.accent.as_css(), content="#ef7d57")
   inspect(theme.padding.left, content="96")
 }
+
+test "swiss grid theme exposes cool contrast colors" {
+  let theme = Theme::swiss_grid()
+  inspect(theme.name, content="swiss-grid")
+  inspect(theme.background.as_css(), content="#fffdf6")
+  inspect(theme.accent.as_css(), content="#0057ff")
+  inspect(theme.padding.left, content="84")
+}

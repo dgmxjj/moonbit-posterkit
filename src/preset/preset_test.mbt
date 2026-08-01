@@ -14,3 +14,10 @@ test "youtube thumbnail preset keeps widescreen aspect ratio" {
   inspect(preset.canvas.height, content="720")
   inspect(preset.aspect_ratio_label(), content="16:9")
 }
+
+test "social story preset supports vertical campaigns" {
+  let preset = PosterPreset::social_story()
+  inspect(preset.canvas.width, content="1080")
+  inspect(preset.canvas.height, content="1920")
+  inspect(preset.safe_area().left, content="84")
+}

@@ -38,3 +38,11 @@ pub fn PosterPreset::youtube_thumbnail() -> PosterPreset {
     margin: @core.EdgeInsets::all(72),
   }
 }
+
+pub fn PosterPreset::social_story() -> PosterPreset {
+  {
+    name: "social-story",
+    canvas: { width: 1080, height: 1920 },
+    margin: @core.EdgeInsets::all(84),
+  }
+}

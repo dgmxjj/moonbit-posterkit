@@ -1,0 +1,7 @@
+import {
+  "dgmxjj/moonbit-posterkit/preset" @preset,
+  "dgmxjj/moonbit-posterkit/svg" @svg,
+  "dgmxjj/moonbit-posterkit/template" @template,
+  "dgmxjj/moonbit-posterkit/theme" @theme,
+  "moonbitlang/core/json" @json,
+}
