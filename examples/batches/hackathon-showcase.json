@@ -1,0 +1,52 @@
+{
+  "jobs": [
+    {
+      "slug": "launch-square",
+      "template": "launch",
+      "preset": "instagram-square",
+      "theme": "warm-editorial",
+      "content": {
+        "eyebrow": "MoonBit Hackathon 2026",
+        "title": "MoonBit PosterKit",
+        "subtitle": "Data-driven poster generation DSL",
+        "body": "Compose reusable layouts, typography, image slots, and presets with typed MoonBit APIs.",
+        "cta": "Build once, render everywhere",
+        "footer": "mooncakes.io / github",
+        "image_label": "Replace Cover Art",
+        "image_asset_id": "cover-art"
+      }
+    },
+    {
+      "slug": "editorial-story",
+      "template": "editorial",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "MoonBit Hackathon 2026",
+        "title": "Poster systems that stay programmable",
+        "subtitle": "A reusable visual language for release covers and social campaigns.",
+        "body": "Ship themed covers, editorial stories, and event visuals from one typed pipeline.",
+        "cta": "Readable, repeatable, release-ready",
+        "footer": "issue 01 / august / moonbit ecosystem",
+        "image_label": "Replace Story Image",
+        "image_asset_id": "story-art"
+      }
+    },
+    {
+      "slug": "event-card",
+      "template": "event",
+      "preset": "instagram-square",
+      "theme": "warm-editorial",
+      "content": {
+        "eyebrow": "MoonBit Hackathon 2026",
+        "title": "Build Better Posters",
+        "subtitle": "Workshop / live coding / template walkthrough",
+        "body": "Share event details, code snippets, and social-ready visuals from one batch config.",
+        "cta": "August 2026 / online + on-site",
+        "footer": "Shanghai / livestream / moonbit-posterkit",
+        "image_label": "Replace Speaker Image",
+        "image_asset_id": "speaker-card"
+      }
+    }
+  ]
+}

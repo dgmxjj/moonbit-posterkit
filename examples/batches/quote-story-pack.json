@@ -1,0 +1,36 @@
+{
+  "jobs": [
+    {
+      "slug": "founder-quote",
+      "template": "quote",
+      "preset": "instagram-square",
+      "theme": "warm-editorial",
+      "content": {
+        "eyebrow": "Builder Quote",
+        "title": "Design systems become momentum once they can be reused and reviewed in code.",
+        "subtitle": "MoonBit Community",
+        "body": "Pair structured layouts with typed content so quotes, promos, and recaps all stay consistent.",
+        "cta": "Share the idea / keep the voice",
+        "footer": "quote card / portrait / social square",
+        "image_label": "Replace Founder Portrait",
+        "image_asset_id": "founder-portrait"
+      }
+    },
+    {
+      "slug": "speaker-portrait-story",
+      "template": "quote",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "Speaker Note",
+        "title": "Templates are most useful when they survive edits, handoffs, and release pressure.",
+        "subtitle": "Hackathon Workshop Host",
+        "body": "Use the same content schema for square pull quotes, story slides, and event-side speaker cards.",
+        "cta": "Story portrait / event teaser",
+        "footer": "quote story / portrait / swipes",
+        "image_label": "Replace Speaker Portrait",
+        "image_asset_id": "speaker-portrait"
+      }
+    }
+  ]
+}

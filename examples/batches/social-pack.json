@@ -1,0 +1,36 @@
+{
+  "jobs": [
+    {
+      "slug": "teaser-story",
+      "template": "launch",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "MoonBit PosterKit",
+        "title": "Launch visuals from typed configs",
+        "subtitle": "Create poster, story, and cover systems in MoonBit.",
+        "body": "Drive social packs from stable templates instead of manually editing each frame.",
+        "cta": "Batch render / swap content / keep hierarchy",
+        "footer": "template launch / preset social-story / theme swiss-grid",
+        "image_label": "Replace Teaser Image",
+        "image_asset_id": "teaser-image"
+      }
+    },
+    {
+      "slug": "event-story",
+      "template": "event",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "MoonBit Hackathon",
+        "title": "From config to campaign",
+        "subtitle": "A story-sized variant for fast event promotion.",
+        "body": "Use the same content model for vertical stories, squares, and wide thumbnails.",
+        "cta": "One content source / many aspect ratios",
+        "footer": "vertical social pack / automated output",
+        "image_label": "Replace Event Story Image",
+        "image_asset_id": "event-story"
+      }
+    }
+  ]
+}

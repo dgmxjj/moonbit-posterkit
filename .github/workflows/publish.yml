@@ -1,0 +1,56 @@
+name: Publish Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Verify MoonBit 0.10.3
+        shell: bash
+        run: |
+          moon version --all
+          moon_version="$(moon version | head -n 1)"
+          echo "$moon_version"
+          echo "$moon_version" | grep "0.10.3"
+
+      - name: Install dependencies
+        run: moon install
+
+      - name: Prepublish checks
+        run: |
+          moon check --target all
+          moon test --target all
+          moon fmt --check
+          moon info
+          git diff --exit-code
+
+      - name: Publish to Mooncakes
+        env:
+          MOONCAKES_TOKEN: ${{ secrets.MOONCAKES_TOKEN }}
+        shell: bash
+        run: |
+          if [ -z "$MOONCAKES_TOKEN" ]; then
+            echo "Error: MOONCAKES_TOKEN secret is not set."
+            exit 1
+          fi
+          cat > "$HOME/.moon/credentials.json" <<EOF
+          {
+            "token": "$MOONCAKES_TOKEN"
+          }
+          EOF
+          moon publish
+          rm -f "$HOME/.moon/credentials.json"

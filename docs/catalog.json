@@ -1,0 +1,284 @@
+﻿{
+  "module_name": "dgmxjj/moonbit-posterkit",
+  "version": "0.1.0",
+  "description": "Typed, data-driven SVG poster and cover generation for MoonBit.",
+  "templates": [
+    {
+      "name": "launch",
+      "summary": "Hero-driven release template with headline, body copy, call to action, and image slot.",
+      "default_preset": "instagram-square",
+      "default_theme": "warm-editorial",
+      "supported_presets": [
+        "instagram-square",
+        "youtube-thumbnail",
+        "social-story"
+      ],
+      "supported_themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "editorial",
+      "summary": "Storytelling template that balances cover imagery, kicker text, and long-form editorial copy.",
+      "default_preset": "social-story",
+      "default_theme": "swiss-grid",
+      "supported_presets": [
+        "social-story",
+        "instagram-square"
+      ],
+      "supported_themes": [
+        "swiss-grid",
+        "warm-editorial"
+      ]
+    },
+    {
+      "name": "event",
+      "summary": "Operational event card for title, schedule, venue notes, and speaker or venue imagery.",
+      "default_preset": "instagram-square",
+      "default_theme": "warm-editorial",
+      "supported_presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "supported_themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "quote",
+      "summary": "Quotation-led social card with a portrait slot, speaker attribution, and supporting context.",
+      "default_preset": "instagram-square",
+      "default_theme": "warm-editorial",
+      "supported_presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "supported_themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "digest",
+      "summary": "Editorial digest layout for weekly recaps, release notes, and summary-first campaign cards.",
+      "default_preset": "youtube-thumbnail",
+      "default_theme": "swiss-grid",
+      "supported_presets": [
+        "youtube-thumbnail",
+        "instagram-square",
+        "social-story"
+      ],
+      "supported_themes": [
+        "swiss-grid",
+        "warm-editorial"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "instagram-square",
+      "summary": "Balanced 1:1 social card for launch graphics, quote cards, and event promos.",
+      "width": 1080,
+      "height": 1080,
+      "safe_margin": 96,
+      "aspect_ratio": "1:1"
+    },
+    {
+      "name": "youtube-thumbnail",
+      "summary": "Wide 16:9 hero suitable for release thumbnails, cover banners, and livestream cards.",
+      "width": 1280,
+      "height": 720,
+      "safe_margin": 72,
+      "aspect_ratio": "16:9"
+    },
+    {
+      "name": "social-story",
+      "summary": "Tall 9:16 story layout for teasers, editorial slides, and mobile-first updates.",
+      "width": 1080,
+      "height": 1920,
+      "safe_margin": 84,
+      "aspect_ratio": "9:16"
+    }
+  ],
+  "themes": [
+    {
+      "name": "warm-editorial",
+      "summary": "Warm editorial palette with soft paper tones and orange accents for launch and event work.",
+      "background": "#f8f0e3",
+      "foreground": "#1f1a17",
+      "accent": "#ef7d57",
+      "padding": 96,
+      "title_size": 96,
+      "body_size": 34
+    },
+    {
+      "name": "swiss-grid",
+      "summary": "Clean high-contrast system with grid-friendly spacing for stories, digests, and product cards.",
+      "background": "#fffdf6",
+      "foreground": "#111111",
+      "accent": "#0057ff",
+      "padding": 84,
+      "title_size": 88,
+      "body_size": 32
+    }
+  ],
+  "packs": [
+    {
+      "name": "hackathon-showcase",
+      "summary": "Square launch, story editorial, and event card assets for a MoonBit hackathon sprint.",
+      "jobs": 3,
+      "templates": [
+        "launch",
+        "editorial",
+        "event"
+      ],
+      "presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "social-pack",
+      "summary": "Vertical stories for teasers and event promotion.",
+      "jobs": 2,
+      "templates": [
+        "launch",
+        "event"
+      ],
+      "presets": [
+        "social-story"
+      ],
+      "themes": [
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "conference-pack",
+      "summary": "A mixed asset family for CFP, keynote, and venue updates.",
+      "jobs": 3,
+      "templates": [
+        "launch",
+        "editorial",
+        "event"
+      ],
+      "presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "themes": [
+        "swiss-grid",
+        "warm-editorial"
+      ]
+    },
+    {
+      "name": "product-launch-pack",
+      "summary": "A broad product release bundle spanning announcement, feature story, and webinar assets.",
+      "jobs": 3,
+      "templates": [
+        "launch",
+        "editorial",
+        "event"
+      ],
+      "presets": [
+        "youtube-thumbnail",
+        "social-story",
+        "instagram-square"
+      ],
+      "themes": [
+        "swiss-grid",
+        "warm-editorial"
+      ]
+    },
+    {
+      "name": "education-pack",
+      "summary": "Assets for tutorials, curriculum drops, and classroom updates.",
+      "jobs": 3,
+      "templates": [
+        "launch",
+        "editorial",
+        "event"
+      ],
+      "presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "community-pack",
+      "summary": "Community spotlights, weekly digests, and member-driven announcements.",
+      "jobs": 2,
+      "templates": [
+        "launch",
+        "editorial"
+      ],
+      "presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "themes": [
+        "swiss-grid",
+        "warm-editorial"
+      ]
+    },
+    {
+      "name": "quote-story-pack",
+      "summary": "Thought leadership cards, founder quotes, and speaker portraits for social campaigns.",
+      "jobs": 2,
+      "templates": [
+        "quote"
+      ],
+      "presets": [
+        "instagram-square",
+        "social-story"
+      ],
+      "themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    },
+    {
+      "name": "weekly-digest-pack",
+      "summary": "Weekly recaps, release summaries, and multi-item campaign digest assets.",
+      "jobs": 3,
+      "templates": [
+        "digest"
+      ],
+      "presets": [
+        "youtube-thumbnail",
+        "instagram-square",
+        "social-story"
+      ],
+      "themes": [
+        "swiss-grid",
+        "warm-editorial"
+      ]
+    },
+    {
+      "name": "release-notes-pack",
+      "summary": "A release-note oriented set that mixes thumbnails, social squares, and event reminders.",
+      "jobs": 3,
+      "templates": [
+        "launch",
+        "event"
+      ],
+      "presets": [
+        "youtube-thumbnail",
+        "instagram-square"
+      ],
+      "themes": [
+        "warm-editorial",
+        "swiss-grid"
+      ]
+    }
+  ]
+}

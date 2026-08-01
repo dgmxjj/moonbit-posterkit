@@ -1,0 +1,88 @@
+name: Check and Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - feat/moonbit-posterkit
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install MoonBit (Unix)
+        if: ${{ matrix.os != 'windows-latest' }}
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Install MoonBit (Windows)
+        if: ${{ matrix.os == 'windows-latest' }}
+        shell: powershell
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+          irm https://cli.moonbitlang.com/install/powershell.ps1 | iex
+          "C:\Users\runneradmin\.moon\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+
+      - name: Verify MoonBit 0.10.3 (Unix)
+        if: ${{ matrix.os != 'windows-latest' }}
+        shell: bash
+        run: |
+          moon version --all
+          moon_version="$(moon version | head -n 1)"
+          echo "$moon_version"
+          echo "$moon_version" | grep "0.10.3"
+
+      - name: Verify MoonBit 0.10.3 (Windows)
+        if: ${{ matrix.os == 'windows-latest' }}
+        shell: powershell
+        run: |
+          moon version --all
+          $version = (moon version | Select-Object -First 1)
+          Write-Host $version
+          if ($version -notmatch "0.10.3") {
+            throw "Expected MoonBit 0.10.3, got: $version"
+          }
+
+      - name: Install dependencies
+        run: moon install
+
+      - name: moon check
+        run: moon check --target all
+
+      - name: moon test
+        run: moon test --target all
+
+      - name: moon fmt
+        run: moon fmt --check
+
+      - name: moon info
+        run: |
+          moon info
+          git diff --exit-code
+
+      - name: CLI smoke test
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          rm -rf ci-rendered
+          rm -f ci-quote-story-pack.json
+          moon run --target native src/cli list-templates | grep "digest"
+          moon run --target native src/cli validate examples/batches/hackathon-showcase.json
+          moon run --target native src/cli emit-pack quote-story-pack ci-quote-story-pack.json
+          test -f ci-quote-story-pack.json
+          moon run --target native src/cli batch examples/batches/hackathon-showcase.json ci-rendered
+          test -f ci-rendered/launch-square.svg
+          test -f ci-rendered/editorial-story.svg
+          test -f ci-rendered/event-card.svg

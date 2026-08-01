@@ -1,0 +1,52 @@
+{
+  "jobs": [
+    {
+      "slug": "release-digest-wide",
+      "template": "digest",
+      "preset": "youtube-thumbnail",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "Weekly Digest",
+        "title": "What shipped in MoonBit PosterKit this week",
+        "subtitle": "Templates, validation, and CLI output all matured together.",
+        "body": "Summarize releases, docs, and examples with a repeatable format that teams can batch render.",
+        "cta": "Open the changelog",
+        "footer": "digest / release / weekly recap",
+        "image_label": "Replace Digest Cover",
+        "image_asset_id": "digest-cover"
+      }
+    },
+    {
+      "slug": "feature-digest-square",
+      "template": "digest",
+      "preset": "instagram-square",
+      "theme": "warm-editorial",
+      "content": {
+        "eyebrow": "Feature Digest",
+        "title": "One content source, many aspect ratios",
+        "subtitle": "Square and wide digest cards can share the same structure.",
+        "body": "Turn summary-heavy announcements into reusable visual blocks that still read clearly at a glance.",
+        "cta": "Read the recap",
+        "footer": "feature digest / square card / release notes",
+        "image_label": "Replace Feature Digest Art",
+        "image_asset_id": "feature-digest-art"
+      }
+    },
+    {
+      "slug": "community-digest-story",
+      "template": "digest",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "Community Digest",
+        "title": "Ecosystem highlights, talks, and maintainers in one visual summary",
+        "subtitle": "Story-sized weekly roundups for maintainers and community editors.",
+        "body": "Batch render digest slides for stories, recap threads, and event newsletters from the same typed data.",
+        "cta": "Swipe the highlights",
+        "footer": "story digest / ecosystem / roundup",
+        "image_label": "Replace Community Digest Art",
+        "image_asset_id": "community-digest-art"
+      }
+    }
+  ]
+}
