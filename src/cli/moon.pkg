@@ -1,0 +1,6 @@
+import {
+  "dgmxjj/moonbit-posterkit/cli_support" @support,
+  "moonbitlang/x/sys",
+}
+
+pkgtype(kind: "executable")

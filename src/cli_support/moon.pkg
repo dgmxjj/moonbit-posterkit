@@ -1,0 +1,9 @@
+import {
+  "dgmxjj/moonbit-posterkit/catalog",
+  "dgmxjj/moonbit-posterkit/catalog_meta",
+  "dgmxjj/moonbit-posterkit/config",
+  "dgmxjj/moonbit-posterkit/manifest",
+  "dgmxjj/moonbit-posterkit/registry",
+  "moonbitlang/core/json",
+  "moonbitlang/x/fs",
+}

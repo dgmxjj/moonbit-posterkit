@@ -8,10 +8,14 @@ repository = ""
 
 license = "Apache-2.0"
 
-keywords = ["poster", "svg", "graphics", "dsl", "template"]
+keywords = [ "poster", "svg", "graphics", "dsl", "template" ]
 
 preferred_target = "wasm-gc"
 
 description = "Typed, data-driven SVG poster and cover generation for MoonBit."
 
 source = "src"
+
+import {
+  "moonbitlang/x@0.4.47",
+}

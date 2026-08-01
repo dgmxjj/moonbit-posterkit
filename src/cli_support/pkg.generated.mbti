@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/cli_support"
+
+import {
+  "dgmxjj/moonbit-posterkit/config",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn catalog_json_output() -> String
+
+pub fn catalog_markdown_output() -> String
+
+pub fn emit_pack_json(String) -> Result[String, CliError]
+
+pub fn output_path(String, String) -> String
+
+pub fn pack_listing_output() -> String
+
+pub fn parse_command(Array[String]) -> Result[CliCommand, CliError]
+
+pub fn preset_listing_output() -> String
+
+pub fn run_cli(Array[String]) -> Int
+
+pub fn template_listing_output() -> String
+
+pub fn theme_listing_output() -> String
+
+pub fn usage() -> String
+
+pub fn validation_output(@config.ValidationSummary) -> String
+
+// Errors
+
+// Types and methods
+pub(all) enum CliCommand {
+  Batch(input~ : String, output_dir~ : String)
+  Render(input~ : String, output_file~ : String)
+  Validate(input~ : String)
+  EmitPack(name~ : String, output_file~ : String)
+  ListTemplates
+  ListPresets
+  ListThemes
+  ListPacks
+  CatalogJson
+  CatalogMarkdown
+} derive(Eq, @debug.Debug)
+
+pub(all) enum CliError {
+  Usage
+  InvalidCommand(name~ : String)
+  Render(error~ : @config.ConfigError)
+  IO(path~ : String, message~ : String)
+  UnknownPack(name~ : String)
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
