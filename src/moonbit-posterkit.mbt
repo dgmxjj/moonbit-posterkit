@@ -1,4 +1,12 @@
 pub using @core { type EdgeInsets, type Size }
+pub using @layout {
+  type GridSpec,
+  type HorizontalAlign,
+  type VerticalAlign,
+  anchor,
+  grid,
+  stack_vertical,
+}
 pub using @preset { type PosterPreset }
 pub using @scene {
   type Element,
@@ -10,4 +18,9 @@ pub using @scene {
   type TextStyle,
 }
 pub using @svg { render_svg }
+pub using @textflow {
+  estimate_chars_per_line,
+  paragraph_to_elements,
+  wrap_text,
+}
 pub using @theme { type Color, type Theme }

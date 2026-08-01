@@ -15,3 +15,19 @@ test "root facade re-exports scene helpers and svg renderer" {
   )
   inspect(render_svg(document).contains("<svg"), content="true")
 }
+
+test "root facade re-exports layout and textflow helpers" {
+  inspect(
+    wrap_text("MoonBit poster generation toolkit", max_chars=12).length(),
+    content="4",
+  )
+  inspect(
+    stack_vertical(
+      region=Rect::{ x: 0, y: 0, width: 640, height: 300 },
+      item_heights=[100, 80],
+      gap=20,
+    )
+    .length(),
+    content="2",
+  )
+}

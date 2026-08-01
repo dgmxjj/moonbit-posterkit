@@ -1,0 +1,7 @@
+import {
+  "dgmxjj/moonbit-posterkit/scene" @scene,
+}
+
+import {
+  "dgmxjj/moonbit-posterkit/theme" @theme,
+} for "test"

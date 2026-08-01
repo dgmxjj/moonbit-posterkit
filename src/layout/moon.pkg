@@ -1,0 +1,4 @@
+import {
+  "dgmxjj/moonbit-posterkit/core" @core,
+  "dgmxjj/moonbit-posterkit/scene" @scene,
+}
