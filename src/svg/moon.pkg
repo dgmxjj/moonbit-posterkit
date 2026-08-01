@@ -1,8 +1,8 @@
 import {
-  "dgmxjj/moonbit-posterkit/scene" @scene,
-  "dgmxjj/moonbit-posterkit/theme" @theme,
+  "dgmxjj/moonbit-posterkit/scene",
+  "dgmxjj/moonbit-posterkit/theme",
 }
 
 import {
-  "dgmxjj/moonbit-posterkit/preset" @preset,
+  "dgmxjj/moonbit-posterkit/preset",
 } for "test"

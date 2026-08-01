@@ -1,8 +1,10 @@
+///|
 pub(all) struct Point {
   x : Int
   y : Int
 } derive(Debug, Eq)
 
+///|
 pub(all) struct Rect {
   x : Int
   y : Int
@@ -10,17 +12,20 @@ pub(all) struct Rect {
   height : Int
 } derive(Debug, Eq)
 
+///|
 pub(all) enum TextAlign {
   Left
   Center
   Right
 } derive(Debug, Eq)
 
+///|
 pub(all) enum ImageFit {
   Cover
   Contain
 } derive(Debug, Eq)
 
+///|
 pub(all) struct TextStyle {
   family : String
   size : Int
@@ -30,6 +35,7 @@ pub(all) struct TextStyle {
   color : @theme.Color
 } derive(Debug, Eq)
 
+///|
 pub(all) enum Element {
   Block(id~ : String, rect~ : Rect, fill~ : @theme.Color, radius~ : Int)
   Text(
@@ -37,17 +43,18 @@ pub(all) enum Element {
     content~ : String,
     position~ : Point,
     style~ : TextStyle,
-    max_width~ : Int,
+    max_width~ : Int
   )
   ImageSlot(
     id~ : String,
     asset_id~ : String,
     rect~ : Rect,
     label~ : String,
-    fit~ : ImageFit,
+    fit~ : ImageFit
   )
 } derive(Debug, Eq)
 
+///|
 pub(all) struct PosterDocument {
   title : String
   preset : @preset.PosterPreset
@@ -55,10 +62,12 @@ pub(all) struct PosterDocument {
   elements : Array[Element]
 } derive(Debug, Eq)
 
+///|
 pub fn Point::at(x : Int, y : Int) -> Point {
   { x, y }
 }
 
+///|
 pub fn Rect::inset(rect : Rect, edge : @core.EdgeInsets) -> Rect {
   {
     x: rect.x + edge.left,
@@ -68,6 +77,7 @@ pub fn Rect::inset(rect : Rect, edge : @core.EdgeInsets) -> Rect {
   }
 }
 
+///|
 pub fn TextStyle::display(theme : @theme.Theme) -> TextStyle {
   {
     family: "Georgia, Source Han Serif SC, serif",
@@ -79,6 +89,7 @@ pub fn TextStyle::display(theme : @theme.Theme) -> TextStyle {
   }
 }
 
+///|
 pub fn TextStyle::body(theme : @theme.Theme) -> TextStyle {
   {
     family: "Arial, Noto Sans SC, sans-serif",
@@ -90,6 +101,7 @@ pub fn TextStyle::body(theme : @theme.Theme) -> TextStyle {
   }
 }
 
+///|
 pub fn PosterDocument::empty(
   title~ : String,
   preset~ : @preset.PosterPreset,
@@ -98,20 +110,22 @@ pub fn PosterDocument::empty(
   { title, preset, theme, elements: [] }
 }
 
+///|
 pub fn PosterDocument::push(
   document : PosterDocument,
   element : Element,
 ) -> PosterDocument {
   let elements = document.elements.copy()
   elements.push(element)
-  { ..document, elements }
+  { ..document, elements, }
 }
 
+///|
 pub fn PosterDocument::push_iter(
   document : PosterDocument,
   new_elements : Iter[Element],
 ) -> PosterDocument {
   let elements = document.elements.copy()
   elements.push_iter(new_elements)
-  { ..document, elements }
+  { ..document, elements, }
 }

@@ -1,8 +1,10 @@
+///|
 test "Color::hex normalizes missing hash prefix" {
   inspect(Color::hex("f25f5c").as_css(), content="#f25f5c")
   inspect(Color::hex("#247ba0").as_css(), content="#247ba0")
 }
 
+///|
 test "warm editorial theme exposes a readable palette" {
   let theme = Theme::warm_editorial()
   inspect(theme.name, content="warm-editorial")
@@ -12,6 +14,7 @@ test "warm editorial theme exposes a readable palette" {
   inspect(theme.padding.left, content="96")
 }
 
+///|
 test "swiss grid theme exposes cool contrast colors" {
   let theme = Theme::swiss_grid()
   inspect(theme.name, content="swiss-grid")

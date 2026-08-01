@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/scene"
+
+import {
+  "dgmxjj/moonbit-posterkit/core",
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/theme",
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) enum Element {
+  Block(id~ : String, rect~ : Rect, fill~ : @theme.Color, radius~ : Int)
+  Text(id~ : String, content~ : String, position~ : Point, style~ : TextStyle, max_width~ : Int)
+  ImageSlot(id~ : String, asset_id~ : String, rect~ : Rect, label~ : String, fit~ : ImageFit)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ImageFit {
+  Cover
+  Contain
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Point {
+  x : Int
+  y : Int
+} derive(Eq, @debug.Debug)
+pub fn Point::at(Int, Int) -> Self
+
+pub(all) struct PosterDocument {
+  title : String
+  preset : @preset.PosterPreset
+  theme : @theme.Theme
+  elements : Array[Element]
+} derive(Eq, @debug.Debug)
+pub fn PosterDocument::empty(title~ : String, preset~ : @preset.PosterPreset, theme~ : @theme.Theme) -> Self
+pub fn PosterDocument::push(Self, Element) -> Self
+pub fn PosterDocument::push_iter(Self, Iter[Element]) -> Self
+
+pub(all) struct Rect {
+  x : Int
+  y : Int
+  width : Int
+  height : Int
+} derive(Eq, @debug.Debug)
+pub fn Rect::inset(Self, @core.EdgeInsets) -> Self
+
+pub(all) enum TextAlign {
+  Left
+  Center
+  Right
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TextStyle {
+  family : String
+  size : Int
+  weight : Int
+  line_height : Int
+  align : TextAlign
+  color : @theme.Color
+} derive(Eq, @debug.Debug)
+pub fn TextStyle::body(@theme.Theme) -> Self
+pub fn TextStyle::display(@theme.Theme) -> Self
+
+// Type aliases
+
+// Traits
+

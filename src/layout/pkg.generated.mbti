@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/layout"
+
+import {
+  "dgmxjj/moonbit-posterkit/core",
+  "dgmxjj/moonbit-posterkit/scene",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn anchor(region~ : @scene.Rect, size~ : @core.Size, h_align~ : HorizontalAlign, v_align~ : VerticalAlign, margin~ : @core.EdgeInsets) -> @scene.Point
+
+pub fn grid(region~ : @scene.Rect, spec~ : GridSpec) -> Array[@scene.Rect]
+
+pub fn stack_vertical(region~ : @scene.Rect, item_heights~ : Array[Int], gap~ : Int) -> Array[@scene.Rect]
+
+// Errors
+
+// Types and methods
+pub(all) struct GridSpec {
+  columns : Int
+  rows : Int
+  gap_x : Int
+  gap_y : Int
+  padding : @core.EdgeInsets
+} derive(Eq, @debug.Debug)
+
+pub(all) enum HorizontalAlign {
+  Start
+  Center
+  End
+} derive(Eq, @debug.Debug)
+
+pub(all) enum VerticalAlign {
+  Top
+  Middle
+  Bottom
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

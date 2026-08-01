@@ -1,3 +1,4 @@
+///|
 pub(all) struct GridSpec {
   columns : Int
   rows : Int
@@ -6,18 +7,21 @@ pub(all) struct GridSpec {
   padding : @core.EdgeInsets
 } derive(Debug, Eq)
 
+///|
 pub(all) enum HorizontalAlign {
   Start
   Center
   End
 } derive(Debug, Eq)
 
+///|
 pub(all) enum VerticalAlign {
   Top
   Middle
   Bottom
 } derive(Debug, Eq)
 
+///|
 pub fn stack_vertical(
   region~ : @scene.Rect,
   item_heights~ : Array[Int],
@@ -26,23 +30,20 @@ pub fn stack_vertical(
   let frames : Array[@scene.Rect] = []
   let mut current_y = region.y
   item_heights.each(height => {
-    frames.push({
-      x: region.x,
-      y: current_y,
-      width: region.width,
-      height,
-    })
+    frames.push({ x: region.x, y: current_y, width: region.width, height })
     current_y = current_y + height + gap
   })
   frames
 }
 
+///|
 pub fn grid(region~ : @scene.Rect, spec~ : GridSpec) -> Array[@scene.Rect] {
   if spec.columns <= 0 || spec.rows <= 0 {
     []
   } else {
     let inner = region.inset(spec.padding)
-    let cell_width = (inner.width - spec.gap_x * (spec.columns - 1)) / spec.columns
+    let cell_width = (inner.width - spec.gap_x * (spec.columns - 1)) /
+      spec.columns
     let cell_height = (inner.height - spec.gap_y * (spec.rows - 1)) / spec.rows
     Array::makei(spec.columns * spec.rows, index => {
       let row = index / spec.columns
@@ -57,6 +58,7 @@ pub fn grid(region~ : @scene.Rect, spec~ : GridSpec) -> Array[@scene.Rect] {
   }
 }
 
+///|
 fn resolve_x(
   region : @scene.Rect,
   width : Int,
@@ -69,6 +71,7 @@ fn resolve_x(
   }
 }
 
+///|
 fn resolve_y(
   region : @scene.Rect,
   height : Int,
@@ -81,6 +84,7 @@ fn resolve_y(
   }
 }
 
+///|
 pub fn anchor(
   region~ : @scene.Rect,
   size~ : @core.Size,

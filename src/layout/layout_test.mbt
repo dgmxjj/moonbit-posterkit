@@ -1,3 +1,4 @@
+///|
 test "stack_vertical splits a region into sequential frames" {
   let frames = stack_vertical(
     region=@scene.Rect::{ x: 0, y: 0, width: 1000, height: 600 },
@@ -10,6 +11,7 @@ test "stack_vertical splits a region into sequential frames" {
   debug_inspect(frames[2], content="{ x: 0, y: 340, width: 1000, height: 120 }")
 }
 
+///|
 test "grid respects padding and gutters" {
   let frames = grid(
     region=@scene.Rect::{ x: 0, y: 0, width: 1080, height: 1080 },
@@ -23,9 +25,13 @@ test "grid respects padding and gutters" {
   )
   inspect(frames.length(), content="4")
   debug_inspect(frames[0], content="{ x: 96, y: 96, width: 432, height: 432 }")
-  debug_inspect(frames[3], content="{ x: 552, y: 552, width: 432, height: 432 }")
+  debug_inspect(
+    frames[3],
+    content="{ x: 552, y: 552, width: 432, height: 432 }",
+  )
 }
 
+///|
 test "anchor places a box at the visual center" {
   let point = anchor(
     region=@scene.Rect::{ x: 100, y: 100, width: 880, height: 880 },

@@ -1,5 +1,5 @@
 import {
-  "dgmxjj/moonbit-posterkit/core" @core,
-  "dgmxjj/moonbit-posterkit/preset" @preset,
-  "dgmxjj/moonbit-posterkit/theme" @theme,
+  "dgmxjj/moonbit-posterkit/core",
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/theme",
 }

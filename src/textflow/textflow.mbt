@@ -1,7 +1,9 @@
+///|
 fn latin_words(content : String) -> Array[String] {
   Array::from_iter(content.split(" ")).map(view => view.to_owned())
 }
 
+///|
 fn wrap_latin(content : String, max_chars : Int) -> Array[String] {
   let lines : Array[String] = []
   let words = latin_words(content)
@@ -22,10 +24,13 @@ fn wrap_latin(content : String, max_chars : Int) -> Array[String] {
   lines
 }
 
+///|
 fn wrap_cjk(content : String, max_chars : Int) -> Array[String] {
   let lines : Array[String] = []
   let mut current : Array[Char] = []
-  content.to_array().each(char => {
+  content
+  .to_array()
+  .each(char => {
     current.push(char)
     if current.length() >= max_chars {
       lines.push(String::from_array(current))
@@ -38,6 +43,7 @@ fn wrap_cjk(content : String, max_chars : Int) -> Array[String] {
   lines
 }
 
+///|
 pub fn estimate_chars_per_line(
   max_width : Int,
   style : @scene.TextStyle,
@@ -46,6 +52,7 @@ pub fn estimate_chars_per_line(
   Int::max(max_width / glyph_width, 1)
 }
 
+///|
 pub fn wrap_text(content : String, max_chars~ : Int) -> Array[String] {
   let budget = Int::max(max_chars, 1)
   if content.contains_char(' ') {
@@ -55,13 +62,17 @@ pub fn wrap_text(content : String, max_chars~ : Int) -> Array[String] {
   }
 }
 
+///|
 pub fn paragraph_to_elements(
   id_prefix~ : String,
   region~ : @scene.Rect,
   content~ : String,
   style~ : @scene.TextStyle,
 ) -> Array[@scene.Element] {
-  let lines = wrap_text(content, max_chars=estimate_chars_per_line(region.width, style))
+  let lines = wrap_text(
+    content,
+    max_chars=estimate_chars_per_line(region.width, style),
+  )
   let elements : Array[@scene.Element] = []
   let mut current_y = region.y
   lines.eachi((index, line) => {
@@ -70,7 +81,7 @@ pub fn paragraph_to_elements(
         id=id_prefix + "-" + (index + 1).to_string(),
         content=line,
         position=@scene.Point::at(region.x, current_y),
-        style=style,
+        style~,
         max_width=region.width,
       ),
     )

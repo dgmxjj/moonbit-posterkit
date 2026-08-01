@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/theme"
+
+import {
+  "dgmxjj/moonbit-posterkit/core",
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct Color {
+  css : String
+} derive(Eq, @debug.Debug)
+pub fn Color::as_css(Self) -> String
+pub fn Color::hex(String) -> Self
+
+pub(all) struct Theme {
+  name : String
+  background : Color
+  foreground : Color
+  accent : Color
+  muted : Color
+  padding : @core.EdgeInsets
+  title_size : Int
+  body_size : Int
+  caption_size : Int
+} derive(Eq, @debug.Debug)
+pub fn Theme::swiss_grid() -> Self
+pub fn Theme::warm_editorial() -> Self
+
+// Type aliases
+
+// Traits
+

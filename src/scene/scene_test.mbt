@@ -1,3 +1,4 @@
+///|
 test "PosterDocument::empty starts with no elements" {
   let document = PosterDocument::empty(
     title="launch",
@@ -7,6 +8,7 @@ test "PosterDocument::empty starts with no elements" {
   inspect(document.elements.length(), content="0")
 }
 
+///|
 test "PosterDocument::push appends blocks and text elements" {
   let base = PosterDocument::empty(
     title="launch",

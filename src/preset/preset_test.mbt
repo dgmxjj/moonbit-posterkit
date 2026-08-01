@@ -1,3 +1,4 @@
+///|
 test "instagram square preset exposes expected canvas and safe area" {
   let preset = PosterPreset::instagram_square()
   inspect(preset.canvas.width, content="1080")
@@ -8,6 +9,7 @@ test "instagram square preset exposes expected canvas and safe area" {
   )
 }
 
+///|
 test "youtube thumbnail preset keeps widescreen aspect ratio" {
   let preset = PosterPreset::youtube_thumbnail()
   inspect(preset.canvas.width, content="1280")
@@ -15,6 +17,7 @@ test "youtube thumbnail preset keeps widescreen aspect ratio" {
   inspect(preset.aspect_ratio_label(), content="16:9")
 }
 
+///|
 test "social story preset supports vertical campaigns" {
   let preset = PosterPreset::social_story()
   inspect(preset.canvas.width, content="1080")

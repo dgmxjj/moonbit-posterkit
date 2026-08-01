@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/core"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct EdgeInsets {
+  top : Int
+  right : Int
+  bottom : Int
+  left : Int
+} derive(Eq, @debug.Debug)
+pub fn EdgeInsets::all(Int) -> Self
+pub fn EdgeInsets::zero() -> Self
+
+pub(all) struct Size {
+  width : Int
+  height : Int
+} derive(Eq, @debug.Debug)
+pub fn Size::square(Int) -> Self
+
+// Type aliases
+
+// Traits
+

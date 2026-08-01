@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/svg"
+
+import {
+  "dgmxjj/moonbit-posterkit/scene",
+}
+
+// Values
+pub fn render_svg(@scene.PosterDocument) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

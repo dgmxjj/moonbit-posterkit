@@ -1,10 +1,13 @@
+///|
 fn escape_xml(raw : String) -> String {
-  raw.replace_all(old="&", new="&amp;")
+  raw
+  .replace_all(old="&", new="&amp;")
   .replace_all(old="<", new="&lt;")
   .replace_all(old=">", new="&gt;")
   .replace_all(old="\"", new="&quot;")
 }
 
+///|
 fn render_text_align(align : @scene.TextAlign) -> String {
   match align {
     @scene.TextAlign::Left => "start"
@@ -13,6 +16,7 @@ fn render_text_align(align : @scene.TextAlign) -> String {
   }
 }
 
+///|
 fn render_image_fit(fit : @scene.ImageFit) -> String {
   match fit {
     @scene.ImageFit::Cover => "cover"
@@ -20,7 +24,13 @@ fn render_image_fit(fit : @scene.ImageFit) -> String {
   }
 }
 
-fn render_block(id : String, rect : @scene.Rect, fill : @theme.Color, radius : Int) -> String {
+///|
+fn render_block(
+  id : String,
+  rect : @scene.Rect,
+  fill : @theme.Color,
+  radius : Int,
+) -> String {
   [
     "<rect",
     " id=\"" + escape_xml(id) + "\"",
@@ -34,6 +44,7 @@ fn render_block(id : String, rect : @scene.Rect, fill : @theme.Color, radius : I
   ].join("")
 }
 
+///|
 fn render_text(
   id : String,
   content : String,
@@ -58,6 +69,7 @@ fn render_text(
   ].join("")
 }
 
+///|
 fn render_image_slot(
   id : String,
   asset_id : String,
@@ -91,6 +103,7 @@ fn render_image_slot(
   ].join("")
 }
 
+///|
 fn render_element(element : @scene.Element) -> String {
   match element {
     Block(id~, rect~, fill~, radius~) => render_block(id, rect, fill, radius)
@@ -101,9 +114,14 @@ fn render_element(element : @scene.Element) -> String {
   }
 }
 
+///|
 pub fn render_svg(document : @scene.PosterDocument) -> String {
   let fragments = document.elements.map(render_element)
-  let view_box = " viewBox=\"0 0 " + document.preset.canvas.width.to_string() + " " + document.preset.canvas.height.to_string() + "\""
+  let view_box = " viewBox=\"0 0 " +
+    document.preset.canvas.width.to_string() +
+    " " +
+    document.preset.canvas.height.to_string() +
+    "\""
   [
     "<svg xmlns=\"http://www.w3.org/2000/svg\"",
     " width=\"" + document.preset.canvas.width.to_string() + "\"",
@@ -111,7 +129,9 @@ pub fn render_svg(document : @scene.PosterDocument) -> String {
     view_box,
     " data-title=\"" + escape_xml(document.title) + "\"",
     ">",
-    "<rect width=\"100%\" height=\"100%\" fill=\"" + document.theme.background.as_css() + "\" />",
+    "<rect width=\"100%\" height=\"100%\" fill=\"" +
+    document.theme.background.as_css() +
+    "\" />",
     fragments.join(""),
     "</svg>",
   ].join("")

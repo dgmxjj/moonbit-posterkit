@@ -1,3 +1,4 @@
+///|
 fn demo_document() -> @scene.PosterDocument {
   @scene.PosterDocument::empty(
     title="launch",
@@ -32,6 +33,7 @@ fn demo_document() -> @scene.PosterDocument {
   )
 }
 
+///|
 test "render_svg emits svg root and background" {
   let svg = render_svg(demo_document())
   inspect(svg.contains("<svg"), content="true")
@@ -39,6 +41,7 @@ test "render_svg emits svg root and background" {
   inspect(svg.contains("fill=\"#f8f0e3\""), content="true")
 }
 
+///|
 test "render_svg includes text and image placeholders" {
   let svg = render_svg(demo_document())
   inspect(svg.contains("MoonBit PosterKit"), content="true")

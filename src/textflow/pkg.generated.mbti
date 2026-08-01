@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/textflow"
+
+import {
+  "dgmxjj/moonbit-posterkit/scene",
+}
+
+// Values
+pub fn estimate_chars_per_line(Int, @scene.TextStyle) -> Int
+
+pub fn paragraph_to_elements(id_prefix~ : String, region~ : @scene.Rect, content~ : String, style~ : @scene.TextStyle) -> Array[@scene.Element]
+
+pub fn wrap_text(String, max_chars~ : Int) -> Array[String]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

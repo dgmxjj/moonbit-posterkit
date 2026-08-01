@@ -1,7 +1,7 @@
 import {
-  "dgmxjj/moonbit-posterkit/scene" @scene,
+  "dgmxjj/moonbit-posterkit/scene",
 }
 
 import {
-  "dgmxjj/moonbit-posterkit/theme" @theme,
+  "dgmxjj/moonbit-posterkit/theme",
 } for "test"

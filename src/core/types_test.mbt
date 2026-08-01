@@ -1,3 +1,4 @@
+///|
 test "Size::square and EdgeInsets helpers" {
   inspect(Size::square(1080).width, content="1080")
   inspect(Size::square(1080).height, content="1080")
@@ -7,6 +8,7 @@ test "Size::square and EdgeInsets helpers" {
   )
 }
 
+///|
 test "EdgeInsets::zero returns all-zero padding" {
   debug_inspect(
     EdgeInsets::zero(),

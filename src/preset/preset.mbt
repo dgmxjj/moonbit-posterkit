@@ -1,9 +1,11 @@
+///|
 pub(all) struct PosterPreset {
   name : String
   canvas : @core.Size
   margin : @core.EdgeInsets
 } derive(Debug, Eq)
 
+///|
 fn gcd(left : Int, right : Int) -> Int {
   if right == 0 {
     left.abs()
@@ -12,10 +14,12 @@ fn gcd(left : Int, right : Int) -> Int {
   }
 }
 
+///|
 pub fn PosterPreset::safe_area(self : PosterPreset) -> @core.EdgeInsets {
   self.margin
 }
 
+///|
 pub fn PosterPreset::aspect_ratio_label(self : PosterPreset) -> String {
   let divisor = gcd(self.canvas.width, self.canvas.height)
   let width = self.canvas.width / divisor
@@ -23,6 +27,7 @@ pub fn PosterPreset::aspect_ratio_label(self : PosterPreset) -> String {
   width.to_string() + ":" + height.to_string()
 }
 
+///|
 pub fn PosterPreset::instagram_square() -> PosterPreset {
   {
     name: "instagram-square",
@@ -31,6 +36,7 @@ pub fn PosterPreset::instagram_square() -> PosterPreset {
   }
 }
 
+///|
 pub fn PosterPreset::youtube_thumbnail() -> PosterPreset {
   {
     name: "youtube-thumbnail",
@@ -39,6 +45,7 @@ pub fn PosterPreset::youtube_thumbnail() -> PosterPreset {
   }
 }
 
+///|
 pub fn PosterPreset::social_story() -> PosterPreset {
   {
     name: "social-story",

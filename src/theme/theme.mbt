@@ -1,7 +1,9 @@
+///|
 pub(all) struct Color {
   css : String
 } derive(Debug, Eq)
 
+///|
 pub(all) struct Theme {
   name : String
   background : Color
@@ -14,6 +16,7 @@ pub(all) struct Theme {
   caption_size : Int
 } derive(Debug, Eq)
 
+///|
 pub fn Color::hex(raw : String) -> Color {
   if raw.has_prefix("#") {
     { css: raw }
@@ -22,10 +25,12 @@ pub fn Color::hex(raw : String) -> Color {
   }
 }
 
+///|
 pub fn Color::as_css(color : Color) -> String {
   color.css
 }
 
+///|
 pub fn Theme::warm_editorial() -> Theme {
   {
     name: "warm-editorial",
@@ -40,6 +45,7 @@ pub fn Theme::warm_editorial() -> Theme {
   }
 }
 
+///|
 pub fn Theme::swiss_grid() -> Theme {
   {
     name: "swiss-grid",
