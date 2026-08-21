@@ -15,4 +15,3 @@ pub fn render_svg(@scene.PosterDocument) -> String
 // Type aliases
 
 // Traits
-

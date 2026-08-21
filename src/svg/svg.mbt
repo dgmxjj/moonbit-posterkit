@@ -8,6 +8,16 @@ fn escape_xml(raw : String) -> String {
 }
 
 ///|
+pub fn escape_text(value : String) -> String {
+  escape_xml(value)
+}
+
+///|
+pub fn escape_attribute(value : String) -> String {
+  escape_xml(value)
+}
+
+///|
 fn render_text_align(align : @scene.TextAlign) -> String {
   match align {
     @scene.TextAlign::Left => "start"
@@ -135,4 +145,16 @@ pub fn render_svg(document : @scene.PosterDocument) -> String {
     fragments.join(""),
     "</svg>",
   ].join("")
+}
+
+///|
+pub fn render_svg_with_metrics(
+  document : @scene.PosterDocument,
+) -> (String, SvgMetrics) {
+  let svg = render_svg(document)
+  let metrics = document.elements.fold(init=SvgMetrics::empty(), (
+    summary,
+    element,
+  ) => summary.add_element(element))
+  (svg, { ..metrics, bytes: svg.length() })
 }
