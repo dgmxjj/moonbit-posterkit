@@ -1,0 +1,11 @@
+import {
+  "dgmxjj/moonbit-posterkit/config",
+  "dgmxjj/moonbit-posterkit/scene",
+  "dgmxjj/moonbit-posterkit/svg",
+}
+
+import {
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/theme",
+  "dgmxjj/moonbit-posterkit/template",
+} for "test"
