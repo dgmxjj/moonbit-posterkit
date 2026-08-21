@@ -16,7 +16,7 @@ let svg = @dgmxjj/moonbit-posterkit/svg.render_svg(document)
 assert svg.contains("<svg")
 ~~~
 
-The library provides scene elements, poster presets, themes, deterministic layout, CJK/Latin text flow, reusable templates, strict batch validation, SVG metrics, and a native CLI.
+The library provides scene elements, poster presets, themes, deterministic layout, CJK/Latin text flow, reusable templates, strict batch validation, SVG metrics, PNG/JPEG asset inspection, deterministic PNG/PDF export, and a native CLI.
 
 ## Package map
 
@@ -28,6 +28,8 @@ The library provides scene elements, poster presets, themes, deterministic layou
 - \`textflow\`: wrapping and bounded text measurement
 - \`template\`: built-in templates and content profiles
 - \`config\`: JSON batches, strict validation, metrics, and output plans
+- \`assets\`: PNG/JPEG metadata inspection and aspect-ratio fitting
+- \`export\`: deterministic PNG encoding and single-page PDF export
 - \`svg\`: stable SVG rendering and validation
 - \`catalog\` and \`manifest\`: campaign packs and catalog exports
 - \`quality\`: document, SVG, and batch audit reports
@@ -46,4 +48,3 @@ See the root README for CLI examples, benchmark fixtures, provenance, and contri
 ## License
 
 Apache-2.0
-

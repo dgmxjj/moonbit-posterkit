@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Added PNG/JPEG asset inspection, deterministic PNG encoding, PDF export, and four operational campaign packs.
+- Added `assets inspect`, `export png`, and `export pdf` CLI commands with real output validation.
+
 ## 0.1.1
 
 - Expanded quality threshold boundary coverage and verified 265 cross-target tests.
