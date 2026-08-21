@@ -42,7 +42,7 @@
 
 - [ ] Record \`git status --short --branch\`, \`git log --oneline --decorate -12\`, \`git remote show origin\`, and \`moon version --all\`.
 - [ ] Run \`moon install\`, \`moon check --target all\`, \`moon test --target all\`, \`moon fmt --check\`, and \`moon info\`. Record failures before changing code.
-- [ ] Count tracked \`src/**/*.mbt\` and \`src/**/*.mbti\) while excluding \`_build\`, \`.mooncakes\`, and generated build directories. Keep the count in the work log until final verification.
+- [ ] Count tracked \`src/**/*.mbt\` and \`src/**/*.mbti\` while excluding \`_build\`, \`.mooncakes\`, and generated build directories. Keep the count in the work log until final verification.
 - [ ] Leave the user’s existing \`docs/application.md\` change untouched. Do not commit a baseline file.
 
 ## Task 2: Safe Geometry and Measurement Primitives
@@ -311,7 +311,7 @@ pub fn render_batch_with_metrics(
 - [ ] Apply the published \`osc2026-guide\` checklist to structure, README, license, history, default branch, source scale, CI, examples, provenance, Mooncakes readiness, and GitHub-only hackathon scope. Separate facts from uncertain remote facts.
 - [ ] Verify \`moon login\` and publish with the authenticated stable toolchain after all local gates pass. Capture actual output; bump version only if the toolchain requires it and record the reason.
 - [ ] Commit only final project files with \`chore: finalize hackathon acceptance release\`; confirm \`docs/application.md\` is absent from the commit.
-- [ ] Push \`main\) to origin and verify with \`git ls-remote --heads origin main\`, \`git log origin/main -1 --oneline\`, and \`gh auth status\`.
+- [ ] Push \`main\` to origin and verify with \`git ls-remote --heads origin main\`, \`git log origin/main -1 --oneline\`, and \`gh auth status\`.
 
 ## Plan Self-Review
 
@@ -320,4 +320,3 @@ pub fn render_batch_with_metrics(
 - Type consistency: new \`Constraints\`, \`RectOverflow\`, \`LayoutResult\`, \`SceneDiagnostic\`, \`TextMeasure\`, \`SvgMetrics\`, \`BatchMetrics\`, and \`ValidationIssue\` names are introduced once and consumed later without changing existing types.
 - Scope: all tasks support the approved SVG-first poster toolkit; PNG/PDF, editor UI, remote asset fetching, and unrelated refactors remain excluded.
 - Safety: the proposal document is never modified; generated artifacts stay within the workspace; credentials are never committed.
-
