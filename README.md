@@ -15,7 +15,10 @@ It combines a small poster-oriented scene DSL, deterministic layout helpers, tem
 - Campaign packs with catalog statistics and query helpers
 - Strict configuration validation, output planning, duplicate-path detection, and batch metrics
 - Deterministic SVG escaping, structural validation, render metrics, and snapshots
-- Native CLI for rendering, validation, inspection, batch generation, catalog export, and benchmark runs
+- PNG asset metadata checks, contain/cover fitting, and deterministic RGBA encoding
+- Single-page vector PDF export with xref validation and scene bridging
+- Release-note, community-digest, event-announcement, and project-spotlight packs
+- CLI for rendering, validation, inspection, PNG/PDF export, catalog export, and benchmarks
 
 ## Quick start
 
@@ -28,6 +31,8 @@ moon test --target all
 moon run --target native src/cli list-templates
 moon run --target native src/cli validate examples/batches/hackathon-showcase.json
 moon run --target native src/cli batch examples/batches/hackathon-showcase.json examples/rendered
+moon run --target native src/cli export png examples/batches/release-note-pack.json examples/exports/png
+moon run --target native src/cli export pdf examples/batches/release-note-pack.json examples/exports/pdf
 ~~~
 
 Inspect and benchmark a batch:
@@ -36,6 +41,7 @@ Inspect and benchmark a batch:
 moon run --target native src/cli inspect examples/batches/hackathon-showcase.json
 moon run --target native src/cli validate --strict examples/batches/hackathon-showcase.json
 moon run --target native src/cli benchmark examples/benchmarks/batch-10.json 3
+moon run --target native src/cli assets inspect examples/exports/png/release-note-card.png
 ~~~
 
 ## Package map
@@ -50,6 +56,8 @@ moon run --target native src/cli benchmark examples/benchmarks/batch-10.json 3
 - \`src/registry\`: template/preset/theme metadata and search queries
 - \`src/config\`: JSON jobs, strict validation, batch metrics, and output plans
 - \`src/svg\`: deterministic SVG rendering, escaping, metrics, and structural checks
+- \`src/assets\`: PNG/JPEG header inspection, asset constraints, and aspect-ratio fitting
+- \`src/export\`: deterministic PNG encoding, PDF writing, and scene export bridges
 - \`src/catalog\`: reusable campaign packs, statistics, and queries
 - \`src/manifest\`: JSON/Markdown catalog export and catalog helpers
 - \`src/cli_support\`: testable command parsing, filesystem operations, reports, and benchmark output
@@ -63,7 +71,9 @@ The pipeline is:
 
 \`JSON -> typed batch -> strict validation -> output plan -> template -> scene -> layout -> SVG\`
 
-Image fields are explicit slots. The library does not download remote assets or embed unknown-origin binary files.
+Image fields are explicit slots. Local PNG/JPEG resources can be inspected for dimensions and format; the library does not download remote assets or embed unknown-origin binary files. PNG export currently rasterizes backgrounds, blocks, and image slots; PDF export preserves supported text and vector primitives. Unsupported photo decoding and advanced font rasterization are reported as explicit limitations.
+
+Operational fixtures are available as [release-note](examples/batches/release-note-pack.json), [community digest](examples/batches/community-digest-pack.json), [event announcement](examples/batches/event-announcement-pack.json), and [project spotlight](examples/batches/project-spotlight-pack.json) batches.
 
 ## Benchmarks
 
@@ -92,4 +102,3 @@ The implementation is MoonBit-first and uses repository-local deterministic exam
 ## Contributing
 
 See [\`CONTRIBUTING.md\`](CONTRIBUTING.md) for development commands, test expectations, API compatibility guidance, and fixture rules.
-

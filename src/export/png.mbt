@@ -41,16 +41,29 @@ fn push_u32(target : Array[Byte], value : Int) -> Unit {
 }
 
 ///|
-fn crc32(bytes : Array[Byte]) -> Int {
-  let mut crc = -1
+fn uint_byte(value : UInt) -> Byte {
+  value.to_byte()
+}
+
+///|
+fn push_u32_uint(target : Array[Byte], value : UInt) -> Unit {
+  target.push(uint_byte(value >> 24))
+  target.push(uint_byte(value >> 16))
+  target.push(uint_byte(value >> 8))
+  target.push(uint_byte(value))
+}
+
+///|
+fn crc32(bytes : Array[Byte]) -> UInt {
+  let mut crc : UInt = 0xFFFFFFFF
   bytes.each(byte => {
-    crc = Int::lxor(crc, byte.to_int())
+    crc = UInt::lxor(crc, byte.to_uint64().to_uint())
     for _ in 0..<8 {
-      let mask = if Int::land(crc, 1) == 1 { -306674912 } else { 0 }
-      crc = Int::lxor(crc >> 1, mask)
+      let mask : UInt = if UInt::land(crc, 1) == 1 { 0xEDB88320 } else { 0 }
+      crc = UInt::lxor(crc >> 1, mask)
     }
   })
-  Int::lxor(crc, -1)
+  UInt::lxor(crc, 0xFFFFFFFF)
 }
 
 ///|
@@ -78,7 +91,7 @@ fn make_chunk(kind : Array[Byte], data : Array[Byte]) -> Array[Byte] {
   let checksum : Array[Byte] = []
   kind.each(byte => checksum.push(byte))
   data.each(byte => checksum.push(byte))
-  push_u32(result, crc32(checksum))
+  push_u32_uint(result, crc32(checksum))
   result
 }
 
@@ -162,4 +175,55 @@ pub fn encode_png(image : PngImage) -> Array[Byte] {
     make_chunk([png_byte(73), png_byte(69), png_byte(78), png_byte(68)], []),
   )
   result
+}
+
+///|
+/// Create a solid RGBA image for render bridges and simple assets.
+pub fn PngImage::solid(
+  width : Int,
+  height : Int,
+  color : Array[Byte],
+) -> Result[PngImage, PngError] {
+  if color.length() != 4 {
+    Err(InvalidPixelLength)
+  } else {
+    let pixels = Array::make(width * height * 4, png_byte(0))
+    for index in 0..<(width * height) {
+      pixels[index * 4] = color[0]
+      pixels[index * 4 + 1] = color[1]
+      pixels[index * 4 + 2] = color[2]
+      pixels[index * 4 + 3] = color[3]
+    }
+    PngImage::rgba(width, height, pixels)
+  }
+}
+
+///|
+/// Draw a clipped filled rectangle into an RGBA image.
+pub fn PngImage::fill_rect(
+  self : PngImage,
+  x : Int,
+  y : Int,
+  width : Int,
+  height : Int,
+  color : Array[Byte],
+) -> PngImage {
+  let start_x = Int::max(0, x)
+  let start_y = Int::max(0, y)
+  let end_x = Int::min(self.width, x + width)
+  let end_y = Int::min(self.height, y + height)
+  if color.length() != 4 || end_x <= start_x || end_y <= start_y {
+    self
+  } else {
+    for row in start_y..<end_y {
+      for column in start_x..<end_x {
+        let index = (row * self.width + column) * 4
+        self.pixels[index] = color[0]
+        self.pixels[index + 1] = color[1]
+        self.pixels[index + 2] = color[2]
+        self.pixels[index + 3] = color[3]
+      }
+    }
+    self
+  }
 }

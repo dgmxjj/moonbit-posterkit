@@ -6,6 +6,7 @@ fn exit_code(error : CliError) -> Int {
     Render(error=_) => 1
     IO(path=_, message=_) => 1
     UnknownPack(name=_) => 1
+    Asset(error=_) => 1
   }
 }
 
@@ -29,6 +30,148 @@ fn print_error(error : CliError) -> Unit {
       println("Render error: duplicate slug \{name}")
     IO(path~, message~) => println("I/O error at \{path}: \{message}")
     UnknownPack(name~) => println("Unknown built-in pack: \{name}")
+    Asset(error~) => println("Asset error: \{asset_error_text(error)}")
+  }
+}
+
+///|
+fn asset_error_text(error : @assets.AssetError) -> String {
+  match error {
+    @assets.AssetError::Empty => "empty-input"
+    @assets.AssetError::Truncated => "truncated-header"
+    @assets.AssetError::InvalidSignature => "invalid-signature"
+    @assets.AssetError::InvalidHeader => "invalid-header"
+    @assets.AssetError::InvalidDimensions => "invalid-dimensions"
+    @assets.AssetError::UnsupportedFormat => "unsupported-format"
+  }
+}
+
+///|
+fn image_format_text(format : @assets.ImageFormat) -> String {
+  match format {
+    @assets.ImageFormat::Png => "png"
+    @assets.ImageFormat::Jpeg => "jpeg"
+    @assets.ImageFormat::Unknown => "unknown"
+  }
+}
+
+///|
+fn run_assets_inspect(input : String) -> Int {
+  try {
+    let bytes = @fs.read_file_to_bytes(input)
+    match @assets.parse_image_info(bytes.to_array()) {
+      Ok(info) => {
+        println("Format: " + image_format_text(info.format))
+        println("Width: " + info.size.width.to_string())
+        println("Height: " + info.size.height.to_string())
+        println("Bytes: " + info.byte_length.to_string())
+        0
+      }
+      Err(error) => {
+        print_error(CliError::Asset(error~))
+        1
+      }
+    }
+  } catch {
+    @fs.IOError(message) => {
+      print_error(CliError::IO(path=input, message~))
+      1
+    }
+  }
+}
+
+///|
+fn export_output_path(
+  output_dir : String,
+  slug : String,
+  extension : String,
+) -> String {
+  let base = output_path(output_dir, slug)
+  String::unsafe_substring(base, start=0, end=base.length() - 4) + extension
+}
+
+///|
+fn export_png_jobs(
+  jobs : Array[@config.PosterJob],
+  output_dir : String,
+  index : Int,
+) -> CliError? {
+  if index >= jobs.length() {
+    None
+  } else {
+    match @config.render_job_document(jobs[index]) {
+      Err(error) => Some(CliError::Render(error~))
+      Ok(document) => {
+        let path = export_output_path(output_dir, jobs[index].slug, ".png")
+        match write_bytes(path, @export.render_poster_png(document)) {
+          Some(error) => Some(error)
+          None => export_png_jobs(jobs, output_dir, index + 1)
+        }
+      }
+    }
+  }
+}
+
+///|
+fn export_pdf_jobs(
+  jobs : Array[@config.PosterJob],
+  output_dir : String,
+  index : Int,
+) -> CliError? {
+  if index >= jobs.length() {
+    None
+  } else {
+    match @config.render_job_document(jobs[index]) {
+      Err(error) => Some(CliError::Render(error~))
+      Ok(document) => {
+        let path = export_output_path(output_dir, jobs[index].slug, ".pdf")
+        match write_text(path, @export.render_poster_pdf(document)) {
+          Some(error) => Some(error)
+          None => export_pdf_jobs(jobs, output_dir, index + 1)
+        }
+      }
+    }
+  }
+}
+
+///|
+fn run_export(input : String, output_dir : String, format : String) -> Int {
+  match ensure_output_dir(output_dir) {
+    Some(error) => {
+      print_error(error)
+      1
+    }
+    None =>
+      match read_batch(input) {
+        Err(error) => {
+          print_error(error)
+          1
+        }
+        Ok(batch) => {
+          let error = if format == "png" {
+            export_png_jobs(batch.jobs, output_dir, 0)
+          } else {
+            export_pdf_jobs(batch.jobs, output_dir, 0)
+          }
+          match error {
+            Some(error) => {
+              print_error(error)
+              1
+            }
+            None => {
+              println(
+                "Generated " +
+                batch.jobs.length().to_string() +
+                " " +
+                format +
+                " file(s) in " +
+                output_dir,
+              )
+              0
+            }
+          }
+        }
+      }
   }
 }
 
@@ -90,7 +233,7 @@ fn run_inspect(input : String) -> Int {
         }
         Ok(summary) => {
           println(validation_output(summary))
-          println("Inspection jobs: {batch.jobs.length()}")
+          println("Inspection jobs: " + batch.jobs.length().to_string())
           0
         }
       }
@@ -233,6 +376,11 @@ pub fn run_cli(args : Array[String]) -> Int {
         CliCommand::Inspect(input~) => run_inspect(input)
         CliCommand::Benchmark(input~, iterations~) =>
           run_benchmark(input, iterations)
+        CliCommand::AssetsInspect(input~) => run_assets_inspect(input)
+        CliCommand::ExportPng(input~, output_dir~) =>
+          run_export(input, output_dir, "png")
+        CliCommand::ExportPdf(input~, output_dir~) =>
+          run_export(input, output_dir, "pdf")
         CliCommand::EmitPack(name~, output_file~) =>
           run_emit_pack(name, output_file)
         CliCommand::ListTemplates => {

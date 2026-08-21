@@ -2,6 +2,7 @@
 package "dgmxjj/moonbit-posterkit/cli_support"
 
 import {
+  "dgmxjj/moonbit-posterkit/assets",
   "dgmxjj/moonbit-posterkit/config",
   "moonbitlang/core/debug",
 }
@@ -57,6 +58,9 @@ pub(all) enum CliCommand {
   ValidateStrict(input~ : String)
   Inspect(input~ : String)
   Benchmark(input~ : String, iterations~ : Int)
+  AssetsInspect(input~ : String)
+  ExportPng(input~ : String, output_dir~ : String)
+  ExportPdf(input~ : String, output_dir~ : String)
   EmitPack(name~ : String, output_file~ : String)
   ListTemplates
   ListPresets
@@ -72,6 +76,7 @@ pub(all) enum CliError {
   Render(error~ : @config.ConfigError)
   IO(path~ : String, message~ : String)
   UnknownPack(name~ : String)
+  Asset(error~ : @assets.AssetError)
 } derive(Eq, @debug.Debug)
 
 // Type aliases

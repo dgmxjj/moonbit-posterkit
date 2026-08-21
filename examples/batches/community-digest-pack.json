@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "slug": "community-digest-card",
+      "template": "digest",
+      "preset": "social-story",
+      "theme": "warm-editorial",
+      "content": {
+        "eyebrow": "Community Digest",
+        "title": "What the ecosystem shipped",
+        "subtitle": "Packages, talks, and examples",
+        "body": "Collect the week's most useful community updates into a story-ready summary.",
+        "cta": "Explore the roundup",
+        "footer": "weekly digest / ecosystem / contributors",
+        "image_label": "Replace Digest Art",
+        "image_asset_id": "community-digest-art"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "slug": "project-spotlight-card",
+      "template": "editorial",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "Project Spotlight",
+        "title": "A closer look at a MoonBit project",
+        "subtitle": "Architecture / use cases / contributors",
+        "body": "Explain a project's value and contribution path with a reusable editorial composition.",
+        "cta": "Explore the repository",
+        "footer": "open source / spotlight / maintainers",
+        "image_label": "Replace Project Art",
+        "image_asset_id": "project-spotlight-art"
+      }
+    }
+  ]
+}

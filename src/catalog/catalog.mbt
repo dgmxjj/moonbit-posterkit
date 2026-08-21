@@ -510,6 +510,110 @@ pub fn release_notes_pack() -> CampaignPack {
 }
 
 ///|
+pub fn release_note_pack() -> CampaignPack {
+  {
+    name: "release-note-pack",
+    description: "Release notes, upgrade highlights, and changelog visuals for community projects.",
+    jobs: [
+      job(
+        slug="release-note-card",
+        template="digest",
+        preset="instagram-square",
+        theme="swiss-grid",
+        content=content(
+          eyebrow="Release Notes",
+          title="What changed this week",
+          subtitle="Highlights for maintainers and users",
+          body="Summarize fixes, features, and migration notes in one repeatable visual card.",
+          cta="Read the changelog",
+          footer="release notes / upgrade / community",
+          image_label="Replace Release Art",
+          image_asset_id="release-note-art",
+        ),
+      ),
+    ],
+  }
+}
+
+///|
+pub fn community_digest_pack() -> CampaignPack {
+  {
+    name: "community-digest-pack",
+    description: "Weekly community digests for packages, talks, examples, and contributor stories.",
+    jobs: [
+      job(
+        slug="community-digest-card",
+        template="digest",
+        preset="social-story",
+        theme="warm-editorial",
+        content=content(
+          eyebrow="Community Digest",
+          title="What the ecosystem shipped",
+          subtitle="Packages, talks, and examples",
+          body="Collect the week’s most useful community updates into a story-ready summary.",
+          cta="Explore the roundup",
+          footer="weekly digest / ecosystem / contributors",
+          image_label="Replace Digest Art",
+          image_asset_id="community-digest-art",
+        ),
+      ),
+    ],
+  }
+}
+
+///|
+pub fn event_announcement_pack() -> CampaignPack {
+  {
+    name: "event-announcement-pack",
+    description: "Event announcements for workshops, livestreams, meetups, and community sessions.",
+    jobs: [
+      job(
+        slug="event-announcement-card",
+        template="event",
+        preset="instagram-square",
+        theme="warm-editorial",
+        content=content(
+          eyebrow="Community Event",
+          title="Build and share together",
+          subtitle="Workshop / livestream / Q&A",
+          body="Publish event details with stable hierarchy for schedules, venues, and registration prompts.",
+          cta="Register now",
+          footer="event / workshop / livestream",
+          image_label="Replace Event Art",
+          image_asset_id="event-announcement-art",
+        ),
+      ),
+    ],
+  }
+}
+
+///|
+pub fn project_spotlight_pack() -> CampaignPack {
+  {
+    name: "project-spotlight-pack",
+    description: "Project spotlights for open source tools, maintainers, technical tags, and contribution links.",
+    jobs: [
+      job(
+        slug="project-spotlight-card",
+        template="editorial",
+        preset="social-story",
+        theme="swiss-grid",
+        content=content(
+          eyebrow="Project Spotlight",
+          title="A closer look at a MoonBit project",
+          subtitle="Architecture / use cases / contributors",
+          body="Explain a project’s value and contribution path with a reusable editorial composition.",
+          cta="Explore the repository",
+          footer="open source / spotlight / maintainers",
+          image_label="Replace Project Art",
+          image_asset_id="project-spotlight-art",
+        ),
+      ),
+    ],
+  }
+}
+
+///|
 pub fn all_packs() -> Array[CampaignPack] {
   [
     hackathon_pack(),
@@ -521,5 +625,9 @@ pub fn all_packs() -> Array[CampaignPack] {
     quote_story_pack(),
     weekly_digest_pack(),
     release_notes_pack(),
+    release_note_pack(),
+    community_digest_pack(),
+    event_announcement_pack(),
+    project_spotlight_pack(),
   ]
 }

@@ -6,6 +6,9 @@ pub(all) enum CliCommand {
   ValidateStrict(input~ : String)
   Inspect(input~ : String)
   Benchmark(input~ : String, iterations~ : Int)
+  AssetsInspect(input~ : String)
+  ExportPng(input~ : String, output_dir~ : String)
+  ExportPdf(input~ : String, output_dir~ : String)
   EmitPack(name~ : String, output_file~ : String)
   ListTemplates
   ListPresets
@@ -22,6 +25,7 @@ pub(all) enum CliError {
   Render(error~ : @config.ConfigError)
   IO(path~ : String, message~ : String)
   UnknownPack(name~ : String)
+  Asset(error~ : @assets.AssetError)
 } derive(Debug, Eq)
 
 ///|
@@ -34,6 +38,9 @@ pub fn usage() -> String {
     #|  posterkit validate --strict <input.json>
     #|  posterkit inspect <input.json>
     #|  posterkit benchmark <input.json> [iterations]
+    #|  posterkit assets inspect <image>
+    #|  posterkit export png <input.json> <output-dir>
+    #|  posterkit export pdf <input.json> <output-dir>
     #|  posterkit emit-pack <pack-name> <output.json>
     #|  posterkit list-templates
     #|  posterkit list-presets

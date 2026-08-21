@@ -10,8 +10,8 @@ test "pack statistics summarize jobs and content" {
 
 ///|
 test "catalog queries find reusable packs by output and template" {
-  inspect(packs_with_template("digest").length(), content="1")
-  inspect(packs_with_preset("social-story").length(), content="8")
-  inspect(catalog_job_count(), content="24")
+  inspect(packs_with_template("digest").length(), content="3")
+  inspect(packs_with_preset("social-story").length(), content="10")
+  inspect(catalog_job_count(), content="28")
   inspect(catalog_template_count(), content="5")
 }

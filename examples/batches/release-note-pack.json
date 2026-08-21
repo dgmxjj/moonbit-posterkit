@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "slug": "release-note-card",
+      "template": "digest",
+      "preset": "instagram-square",
+      "theme": "swiss-grid",
+      "content": {
+        "eyebrow": "Release Notes",
+        "title": "What changed this week",
+        "subtitle": "Highlights for maintainers and users",
+        "body": "Summarize fixes, features, and migration notes in one repeatable visual card.",
+        "cta": "Read the changelog",
+        "footer": "release notes / upgrade / community",
+        "image_label": "Replace Release Art",
+        "image_asset_id": "release-note-art"
+      }
+    }
+  ]
+}

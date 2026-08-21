@@ -2,6 +2,7 @@
 package "dgmxjj/moonbit-posterkit/config"
 
 import {
+  "dgmxjj/moonbit-posterkit/scene",
   "dgmxjj/moonbit-posterkit/template",
   "moonbitlang/core/debug",
   "moonbitlang/core/json",
@@ -31,6 +32,8 @@ pub fn render_batch(BatchJob) -> Result[Array[RenderedPoster], ConfigError]
 pub fn render_batch_with_metrics(BatchJob) -> Result[(Array[RenderedPoster], BatchMetrics), ConfigError]
 
 pub fn render_job(PosterJob) -> Result[RenderedPoster, ConfigError]
+
+pub fn render_job_document(PosterJob) -> Result[@scene.PosterDocument, ConfigError]
 
 pub fn success_rate_percent(BatchMetrics) -> Int
 

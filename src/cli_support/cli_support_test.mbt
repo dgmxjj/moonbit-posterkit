@@ -8,6 +8,11 @@ fn command_text(result : Result[CliCommand, CliError]) -> String {
     Ok(CliCommand::Inspect(input~)) => "inspect:" + input
     Ok(CliCommand::Benchmark(input~, iterations~)) =>
       "benchmark:" + input + ":" + iterations.to_string()
+    Ok(CliCommand::AssetsInspect(input~)) => "assets:" + input
+    Ok(CliCommand::ExportPng(input~, output_dir~)) =>
+      "export-png:" + input + ":" + output_dir
+    Ok(CliCommand::ExportPdf(input~, output_dir~)) =>
+      "export-pdf:" + input + ":" + output_dir
     Ok(CliCommand::EmitPack(name~, output_file~)) => name + "|" + output_file
     Ok(CliCommand::ListTemplates) => "list-templates"
     Ok(CliCommand::ListPresets) => "list-presets"
@@ -20,6 +25,7 @@ fn command_text(result : Result[CliCommand, CliError]) -> String {
     Err(Render(error=_)) => "render"
     Err(IO(path=_, message=_)) => "io"
     Err(UnknownPack(name=_)) => "pack"
+    Err(Asset(error=_)) => "asset"
   }
 }
 
@@ -60,6 +66,26 @@ test "parse_command supports strict validation inspection and benchmark" {
   inspect(
     command_text(parse_command(["posterkit", "benchmark", "input.json", "3"])),
     content="benchmark:input.json:3",
+  )
+}
+
+///|
+test "parse_command supports asset and export commands" {
+  inspect(
+    command_text(parse_command(["posterkit", "assets", "inspect", "cover.png"])),
+    content="assets:cover.png",
+  )
+  inspect(
+    command_text(
+      parse_command(["posterkit", "export", "png", "batch.json", "out"]),
+    ),
+    content="export-png:batch.json:out",
+  )
+  inspect(
+    command_text(
+      parse_command(["posterkit", "export", "pdf", "batch.json", "out"]),
+    ),
+    content="export-pdf:batch.json:out",
   )
 }
 

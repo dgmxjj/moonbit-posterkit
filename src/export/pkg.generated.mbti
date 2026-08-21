@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/export"
+
+import {
+  "dgmxjj/moonbit-posterkit/scene",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn encode_png(PngImage) -> Array[Byte]
+
+pub fn render_pdf(PdfDocument) -> String
+
+pub fn render_poster_pdf(@scene.PosterDocument) -> String
+
+pub fn render_poster_png(@scene.PosterDocument) -> Array[Byte]
+
+// Errors
+
+// Types and methods
+pub(all) struct PdfDocument {
+  width : Int
+  height : Int
+  commands : Array[String]
+} derive(Eq, @debug.Debug)
+pub fn PdfDocument::add_line(Self, Int, Int, Int, Int, String) -> Self
+pub fn PdfDocument::add_rect(Self, Int, Int, Int, Int, String) -> Self
+pub fn PdfDocument::add_text(Self, Int, Int, String) -> Self
+pub fn PdfDocument::page(Int, Int) -> Result[Self, PdfError]
+
+pub enum PdfError {
+  InvalidPageDimensions
+} derive(Eq, @debug.Debug)
+
+pub enum PngError {
+  InvalidDimensions
+  InvalidPixelLength
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PngImage {
+  width : Int
+  height : Int
+  pixels : Array[Byte]
+} derive(Eq, @debug.Debug)
+pub fn PngImage::fill_rect(Self, Int, Int, Int, Int, Array[Byte]) -> Self
+pub fn PngImage::rgba(Int, Int, Array[Byte]) -> Result[Self, PngError]
+pub fn PngImage::solid(Int, Int, Array[Byte]) -> Result[Self, PngError]
+
+// Type aliases
+
+// Traits

@@ -1,5 +1,6 @@
 import {
   "dgmxjj/moonbit-posterkit/registry",
+  "dgmxjj/moonbit-posterkit/scene",
   "dgmxjj/moonbit-posterkit/svg",
   "dgmxjj/moonbit-posterkit/template",
   "moonbitlang/core/json",

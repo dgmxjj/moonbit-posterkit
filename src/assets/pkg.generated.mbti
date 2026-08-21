@@ -1,0 +1,58 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/assets"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn fit_rect(AssetSize, AssetSize, FitMode) -> FittedRect
+
+pub fn parse_image_info(Array[Byte]) -> Result[ImageInfo, AssetError]
+
+// Errors
+
+// Types and methods
+pub(all) enum AssetError {
+  Empty
+  Truncated
+  InvalidSignature
+  InvalidHeader
+  InvalidDimensions
+  UnsupportedFormat
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AssetSize {
+  width : Int
+  height : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum FitMode {
+  Contain
+  Cover
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FittedRect {
+  width : Int
+  height : Int
+  offset_x : Int
+  offset_y : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ImageFormat {
+  Png
+  Jpeg
+  Unknown
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ImageInfo {
+  format : ImageFormat
+  size : AssetSize
+  bit_depth : Int
+  color_type : Int
+  byte_length : Int
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

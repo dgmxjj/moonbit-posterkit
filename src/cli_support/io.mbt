@@ -51,6 +51,16 @@ fn write_text(path : String, content : String) -> CliError? {
 }
 
 ///|
+fn write_bytes(path : String, content : Array[Byte]) -> CliError? {
+  try {
+    @fs.write_bytes_to_file(path, Bytes::from_array(content))
+    None
+  } catch {
+    @fs.IOError(message) => Some(CliError::IO(path~, message~))
+  }
+}
+
+///|
 fn write_posters(
   posters : Array[@config.RenderedPoster],
   output_dir : String,

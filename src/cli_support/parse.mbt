@@ -74,6 +74,20 @@ pub fn parse_command(args : Array[String]) -> Result[CliCommand, CliError] {
         } else {
           Err(CliError::Usage)
         }
+      "assets" =>
+        if args.length() == 4 && args[2] == "inspect" {
+          Ok(CliCommand::AssetsInspect(input=args[3]))
+        } else {
+          Err(CliError::Usage)
+        }
+      "export" =>
+        if args.length() == 5 && args[2] == "png" {
+          Ok(CliCommand::ExportPng(input=args[3], output_dir=args[4]))
+        } else if args.length() == 5 && args[2] == "pdf" {
+          Ok(CliCommand::ExportPdf(input=args[3], output_dir=args[4]))
+        } else {
+          Err(CliError::Usage)
+        }
       "emit-pack" =>
         if args.length() == 4 {
           Ok(CliCommand::EmitPack(name=args[2], output_file=args[3]))

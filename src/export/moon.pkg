@@ -1,1 +1,5 @@
-// Uses the default package configuration.
+import {
+  "dgmxjj/moonbit-posterkit/preset",
+  "dgmxjj/moonbit-posterkit/scene",
+  "dgmxjj/moonbit-posterkit/theme",
+}

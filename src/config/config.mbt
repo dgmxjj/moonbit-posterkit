@@ -111,7 +111,10 @@ pub fn validate_batch(
 }
 
 ///|
-pub fn render_job(job : PosterJob) -> Result[RenderedPoster, ConfigError] {
+/// Build the typed scene document for export backends.
+pub fn render_job_document(
+  job : PosterJob,
+) -> Result[@scene.PosterDocument, ConfigError] {
   match @registry.resolve_preset(job.preset) {
     Some(preset) =>
       match @registry.resolve_theme(job.theme) {
@@ -124,13 +127,22 @@ pub fn render_job(job : PosterJob) -> Result[RenderedPoster, ConfigError] {
                 theme~,
                 content=job.content,
               )
-              Ok({ slug: job.slug, svg: @svg.render_svg(document) })
+              Ok(document)
             }
             None => Err(ConfigError::UnknownTemplate(name=job.template))
           }
         None => Err(ConfigError::UnknownTheme(name=job.theme))
       }
     None => Err(ConfigError::UnknownPreset(name=job.preset))
+  }
+}
+
+///|
+/// Render a job to the existing SVG output.
+pub fn render_job(job : PosterJob) -> Result[RenderedPoster, ConfigError] {
+  match render_job_document(job) {
+    Ok(document) => Ok({ slug: job.slug, svg: @svg.render_svg(document) })
+    Err(error) => Err(error)
   }
 }
 

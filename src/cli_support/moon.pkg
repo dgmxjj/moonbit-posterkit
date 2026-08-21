@@ -2,6 +2,8 @@ import {
   "dgmxjj/moonbit-posterkit/catalog",
   "dgmxjj/moonbit-posterkit/catalog_meta",
   "dgmxjj/moonbit-posterkit/config",
+  "dgmxjj/moonbit-posterkit/assets",
+  "dgmxjj/moonbit-posterkit/export",
   "dgmxjj/moonbit-posterkit/manifest",
   "dgmxjj/moonbit-posterkit/registry",
   "moonbitlang/core/json",

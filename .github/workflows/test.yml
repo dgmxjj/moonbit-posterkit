@@ -88,3 +88,7 @@ jobs:
           moon run --target native src/cli benchmark examples/benchmarks/batch-10.json 2
           moon run --target native src/cli batch examples/batches/hackathon-showcase.json ci-rendered
           test -f ci-rendered/launch-square.svg
+          moon run --target native src/cli export png examples/batches/release-note-pack.json ci-rendered/png
+          moon run --target native src/cli export pdf examples/batches/release-note-pack.json ci-rendered/pdf
+          test -f ci-rendered/png/release-note-card.png
+          test -f ci-rendered/pdf/release-note-card.pdf

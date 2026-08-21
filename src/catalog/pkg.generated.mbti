@@ -13,11 +13,15 @@ pub fn catalog_job_count() -> Int
 
 pub fn catalog_template_count() -> Int
 
+pub fn community_digest_pack() -> CampaignPack
+
 pub fn community_pack() -> CampaignPack
 
 pub fn conference_pack() -> CampaignPack
 
 pub fn education_pack() -> CampaignPack
+
+pub fn event_announcement_pack() -> CampaignPack
 
 pub fn flatten_jobs(CampaignPack) -> @config.BatchJob
 
@@ -31,7 +35,11 @@ pub fn packs_with_template(String) -> Array[CampaignPack]
 
 pub fn product_launch_pack() -> CampaignPack
 
+pub fn project_spotlight_pack() -> CampaignPack
+
 pub fn quote_story_pack() -> CampaignPack
+
+pub fn release_note_pack() -> CampaignPack
 
 pub fn release_notes_pack() -> CampaignPack
 
