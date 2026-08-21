@@ -19,4 +19,3 @@ pub fn wrap_text(String, max_chars~ : Int) -> Array[String]
 // Type aliases
 
 // Traits
-
