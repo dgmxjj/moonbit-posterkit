@@ -1,0 +1,21 @@
+Commands:
+
+    moon run --target wasm src/cli export png examples/batches/release-note-pack.json verify-ops/png
+    moon run --target wasm src/cli export pdf examples/batches/release-note-pack.json verify-ops/pdf
+    moon run --target wasm src/cli assets inspect verify-ops/png/release-note-card.png
+
+Observed output:
+
+    Generated 1 png file(s) in verify-ops/png
+    Format: png
+    Width: 1080
+    Height: 1080
+    Bytes: 4667103
+    Generated 1 pdf file(s) in verify-ops/pdf
+    PDF size: 1212 bytes
+
+The PNG was additionally checked for signature, IHDR/IDAT/IEND ordering, CRCs,
+and zlib decompression. The PDF was checked for `%PDF-1.4`, `%%EOF`, object
+offsets, and xref entries. PNG bridge output currently rasterizes backgrounds,
+blocks, and image slots; PDF bridge output preserves supported text and vector
+primitives.
