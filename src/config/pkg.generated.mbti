@@ -55,4 +55,3 @@ pub(all) struct ValidationSummary {
 // Type aliases
 
 // Traits
-
