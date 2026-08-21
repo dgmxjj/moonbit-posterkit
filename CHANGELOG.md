@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Expanded quality threshold boundary coverage and verified 265 cross-target tests.
+
 ## Unreleased
 
 - Added deterministic geometry constraints, horizontal flow, region splitting, and layout envelopes.
