@@ -25,4 +25,3 @@ pub fn PosterPreset::youtube_thumbnail() -> Self
 // Type aliases
 
 // Traits
-
