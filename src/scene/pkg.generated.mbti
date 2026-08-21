@@ -68,4 +68,3 @@ pub fn TextStyle::display(@theme.Theme) -> Self
 // Type aliases
 
 // Traits
-
