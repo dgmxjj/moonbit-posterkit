@@ -34,4 +34,3 @@ pub fn Theme::warm_editorial() -> Self
 // Type aliases
 
 // Traits
-
