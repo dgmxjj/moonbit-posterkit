@@ -7,6 +7,7 @@ import {
 }
 
 // Values
+pub fn all_extended_presets() -> Array[PosterPreset]
 
 // Errors
 
@@ -16,8 +17,17 @@ pub(all) struct PosterPreset {
   canvas : @core.Size
   margin : @core.EdgeInsets
 } derive(Eq, @debug.Debug)
+pub fn PosterPreset::a4_portrait() -> Self
+pub fn PosterPreset::area(Self) -> Int
 pub fn PosterPreset::aspect_ratio_label(Self) -> String
+pub fn PosterPreset::describe(Self) -> String
 pub fn PosterPreset::instagram_square() -> Self
+pub fn PosterPreset::is_landscape(Self) -> Bool
+pub fn PosterPreset::is_portrait(Self) -> Bool
+pub fn PosterPreset::landscape_card() -> Self
+pub fn PosterPreset::linkedin_landscape() -> Self
+pub fn PosterPreset::open_graph() -> Self
+pub fn PosterPreset::portrait_card() -> Self
 pub fn PosterPreset::safe_area(Self) -> @core.EdgeInsets
 pub fn PosterPreset::social_story() -> Self
 pub fn PosterPreset::youtube_thumbnail() -> Self

@@ -10,11 +10,36 @@ import {
 }
 
 // Values
+pub fn content_summary(TemplateContent) -> String
+
+pub fn density_text(ContentDensity) -> String
+
+pub fn profile_content(TemplateContent) -> ContentProfile
+
+pub fn render_compact(template~ : String, preset~ : @preset.PosterPreset, theme~ : @theme.Theme, content~ : TemplateContent) -> @scene.PosterDocument
+
+pub fn render_story_variant(theme~ : @theme.Theme, content~ : TemplateContent) -> @scene.PosterDocument
+
 pub fn render_template(template~ : String, preset~ : @preset.PosterPreset, theme~ : @theme.Theme, content~ : TemplateContent) -> @scene.PosterDocument
+
+pub fn render_wide_variant(theme~ : @theme.Theme, content~ : TemplateContent) -> @scene.PosterDocument
 
 // Errors
 
 // Types and methods
+pub(all) enum ContentDensity {
+  Sparse
+  Balanced
+  Dense
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ContentProfile {
+  characters : Int
+  non_empty_fields : Int
+  density : ContentDensity
+  has_image : Bool
+} derive(Eq, @debug.Debug)
+
 pub(all) struct TemplateContent {
   eyebrow : String
   title : String

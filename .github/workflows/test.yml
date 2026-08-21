@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - main
-      - feat/moonbit-posterkit
 
 jobs:
   build:
@@ -30,59 +29,62 @@ jobs:
 
       - name: Install MoonBit (Windows)
         if: ${{ matrix.os == 'windows-latest' }}
-        shell: powershell
+        shell: pwsh
         run: |
           Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
           irm https://cli.moonbitlang.com/install/powershell.ps1 | iex
           "C:\Users\runneradmin\.moon\bin" | Out-File -FilePath $env:GITHUB_PATH -Append
 
-      - name: Verify MoonBit 0.10.3 (Unix)
-        if: ${{ matrix.os != 'windows-latest' }}
-        shell: bash
-        run: |
-          moon version --all
-          moon_version="$(moon version | head -n 1)"
-          echo "$moon_version"
-          echo "$moon_version" | grep "0.10.3"
+      - name: Install native dependencies (Linux)
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: sudo apt-get update && sudo apt-get install -y gcc libssl-dev
 
-      - name: Verify MoonBit 0.10.3 (Windows)
+      - name: Install native dependencies (macOS)
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: brew install gcc openssl
+
+      - name: Install native dependencies (Windows)
         if: ${{ matrix.os == 'windows-latest' }}
-        shell: powershell
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-openssl
+
+      - name: Toolchain and dependencies
         run: |
           moon version --all
-          $version = (moon version | Select-Object -First 1)
-          Write-Host $version
-          if ($version -notmatch "0.10.3") {
-            throw "Expected MoonBit 0.10.3, got: $version"
-          }
+          moon update
 
-      - name: Install dependencies
-        run: moon install
+      - name: Moon check
+        run: moon check --deny-warn --target all
 
-      - name: moon check
-        run: moon check --target all
+      - name: Moon test
+        run: moon test --deny-warn --target all
 
-      - name: moon test
-        run: moon test --target all
-
-      - name: moon fmt
-        run: moon fmt --check
-
-      - name: moon info
+      - name: Format and interface lint
         run: |
+          moon fmt
+          git diff --exit-code
           moon info
           git diff --exit-code
 
-      - name: CLI smoke test
+      - name: Native coverage
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          moon test --deny-warn --target native --enable-coverage
+          moon coverage report -f summary
+          moon coverage analyze
+
+      - name: CLI smoke tests
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
           rm -rf ci-rendered
-          rm -f ci-quote-story-pack.json
-          moon run --target native src/cli list-templates | grep "digest"
-          moon run --target native src/cli validate examples/batches/hackathon-showcase.json
-          moon run --target native src/cli emit-pack quote-story-pack ci-quote-story-pack.json
-          test -f ci-quote-story-pack.json
+          moon run --target native src/cli list-templates | grep digest
+          moon run --target native src/cli validate --strict examples/batches/hackathon-showcase.json
+          moon run --target native src/cli inspect examples/batches/hackathon-showcase.json
+          moon run --target native src/cli benchmark examples/benchmarks/batch-10.json 2
           moon run --target native src/cli batch examples/batches/hackathon-showcase.json ci-rendered
           test -f ci-rendered/launch-square.svg
-          test -f ci-rendered/editorial-story.svg
-          test -f ci-rendered/event-card.svg

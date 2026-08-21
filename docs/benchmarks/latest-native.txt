@@ -1,0 +1,16 @@
+Command:
+
+    moon run --target wasm src/cli benchmark examples/benchmarks/batch-10.json 2
+
+Observed output:
+
+    Benchmark iterations: 2
+    Jobs: 2
+    Successful renders: 2
+    SVG bytes per iteration: 3910
+    Measured bytes: 7820
+
+This is a deterministic render-work benchmark: it reports successful jobs and
+serialized SVG bytes across two iterations. It is not a wall-clock throughput
+claim. Native validation is configured in CI with MSYS2 UCRT64; the local
+Windows MinGW installation does not declare the runtime's `rand_s` function.

@@ -16,6 +16,14 @@ pub fn list_themes() -> Array[ThemeInfo]
 
 pub fn preset_names() -> Array[String]
 
+pub fn preset_search(String) -> Array[PresetInfo]
+
+pub fn registry_contains(RegistryKind, String) -> Bool
+
+pub fn registry_names(RegistryKind) -> Array[String]
+
+pub fn registry_summary() -> String
+
 pub fn resolve_preset(String) -> @preset.PosterPreset?
 
 pub fn resolve_preset_info(String) -> PresetInfo?
@@ -30,7 +38,15 @@ pub fn resolve_theme_info(String) -> ThemeInfo?
 
 pub fn template_names() -> Array[String]
 
+pub fn template_search(String) -> Array[TemplateInfo]
+
+pub fn templates_for_preset(String) -> Array[TemplateInfo]
+
+pub fn templates_for_theme(String) -> Array[TemplateInfo]
+
 pub fn theme_names() -> Array[String]
+
+pub fn theme_search(String) -> Array[ThemeInfo]
 
 // Errors
 
@@ -43,6 +59,12 @@ pub(all) struct PresetInfo {
   safe_margin : Int
   aspect_ratio : String
 } derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum RegistryKind {
+  Template
+  Preset
+  Theme
+} derive(Eq, @debug.Debug)
 
 pub(all) struct TemplateInfo {
   name : String

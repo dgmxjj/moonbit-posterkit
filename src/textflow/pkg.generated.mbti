@@ -3,18 +3,48 @@ package "dgmxjj/moonbit-posterkit/textflow"
 
 import {
   "dgmxjj/moonbit-posterkit/scene",
+  "moonbitlang/core/debug",
 }
 
 // Values
 pub fn estimate_chars_per_line(Int, @scene.TextStyle) -> Int
 
+pub fn line_height_for(@scene.TextStyle, Int) -> Int
+
+pub fn measure_text(String, @scene.TextStyle, max_width~ : Int, max_lines~ : Int) -> TextMeasure
+
 pub fn paragraph_to_elements(id_prefix~ : String, region~ : @scene.Rect, content~ : String, style~ : @scene.TextStyle) -> Array[@scene.Element]
+
+pub fn profile_paragraph(String) -> ParagraphProfile
+
+pub fn profile_summary(ParagraphProfile) -> String
+
+pub fn split_lines(String) -> Array[String]
+
+pub fn text_fits_lines(String, @scene.TextStyle, Int, Int) -> Bool
+
+pub fn truncate_text(String, max_chars~ : Int, ellipsis~ : String) -> String
 
 pub fn wrap_text(String, max_chars~ : Int) -> Array[String]
 
 // Errors
 
 // Types and methods
+pub(all) struct ParagraphProfile {
+  paragraphs : Int
+  lines : Int
+  characters : Int
+  words : Int
+  has_cjk : Bool
+  has_explicit_breaks : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TextMeasure {
+  lines : Array[String]
+  width : Int
+  height : Int
+  truncated : Bool
+} derive(Eq, @debug.Debug)
 
 // Type aliases
 

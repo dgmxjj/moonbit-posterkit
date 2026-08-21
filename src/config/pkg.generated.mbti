@@ -8,13 +8,39 @@ import {
 }
 
 // Values
+pub fn invalid_slugs(BatchJob) -> Array[String]
+
+pub fn merge_metrics(BatchMetrics, BatchMetrics) -> BatchMetrics
+
+pub fn metrics_from_sizes(Array[Int]) -> BatchMetrics
+
+pub fn metrics_is_consistent(BatchMetrics) -> Bool
+
+pub fn metrics_summary(BatchMetrics) -> String
+
+pub fn output_plan(String, BatchJob) -> Array[OutputPlan]
+
 pub fn parse_batch(String) -> Result[BatchJob, ConfigError]
+
+pub fn plan_has_duplicate_paths(Array[OutputPlan]) -> Bool
+
+pub fn plan_summary(Array[OutputPlan]) -> String
 
 pub fn render_batch(BatchJob) -> Result[Array[RenderedPoster], ConfigError]
 
+pub fn render_batch_with_metrics(BatchJob) -> Result[(Array[RenderedPoster], BatchMetrics), ConfigError]
+
 pub fn render_job(PosterJob) -> Result[RenderedPoster, ConfigError]
 
+pub fn success_rate_percent(BatchMetrics) -> Int
+
+pub fn valid_output_slug(String) -> Bool
+
 pub fn validate_batch(BatchJob) -> Result[ValidationSummary, ConfigError]
+
+pub fn validate_batch_strict(BatchJob) -> Result[ValidationSummary, Array[ValidationIssue]]
+
+pub fn validation_issues_text(Array[ValidationIssue]) -> String
 
 // Errors
 
@@ -23,6 +49,15 @@ pub(all) struct BatchJob {
   jobs : Array[PosterJob]
 } derive(Eq, ToJson, @debug.Debug, @json.FromJson)
 
+pub(all) struct BatchMetrics {
+  total : Int
+  succeeded : Int
+  failed : Int
+  total_svg_bytes : Int
+  average_svg_bytes : Int
+} derive(Eq, ToJson, @debug.Debug)
+pub fn BatchMetrics::empty(Int) -> Self
+
 pub(all) enum ConfigError {
   InvalidJson(message~ : String)
   UnknownPreset(name~ : String)
@@ -30,6 +65,15 @@ pub(all) enum ConfigError {
   UnknownTemplate(name~ : String)
   DuplicateSlug(name~ : String)
 } derive(Eq, @debug.Debug)
+
+pub(all) struct OutputPlan {
+  slug : String
+  relative_path : String
+  index : Int
+  template : String
+  preset : String
+  theme : String
+} derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct PosterJob {
   slug : String
@@ -43,6 +87,13 @@ pub(all) struct RenderedPoster {
   slug : String
   svg : String
 } derive(Eq, @debug.Debug)
+
+pub(all) struct ValidationIssue {
+  job_index : Int
+  field : String
+  code : String
+  message : String
+} derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct ValidationSummary {
   total_jobs : Int

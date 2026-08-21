@@ -1,0 +1,62 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "dgmxjj/moonbit-posterkit/quality"
+
+import {
+  "dgmxjj/moonbit-posterkit/config",
+  "dgmxjj/moonbit-posterkit/scene",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn audit_batch(@config.BatchJob) -> QualityReport
+
+pub fn audit_document(@scene.PosterDocument) -> QualityReport
+
+pub fn audit_svg(String) -> QualityReport
+
+pub fn checklist_is_strong(QualityChecklist) -> Bool
+
+pub fn checklist_summary(QualityChecklist) -> String
+
+pub fn combine_reports(QualityReport, QualityReport, QualityReport) -> QualityChecklist
+
+pub fn grade_for(Int) -> QualityGrade
+
+pub fn grade_text(QualityGrade) -> String
+
+pub fn report_errors(Array[QualityReport]) -> Array[String]
+
+pub fn report_scores(Array[QualityReport]) -> Array[Int]
+
+pub fn report_summary(QualityReport) -> String
+
+// Errors
+
+// Types and methods
+pub(all) struct QualityChecklist {
+  document : QualityReport
+  svg : QualityReport
+  batch : QualityReport
+  overall_score : Int
+  overall_grade : QualityGrade
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum QualityGrade {
+  Excellent
+  Good
+  Review
+  Reject
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct QualityReport {
+  grade : QualityGrade
+  score : Int
+  checks : Int
+  passed : Int
+  warnings : Array[String]
+  errors : Array[String]
+} derive(Eq, ToJson, @debug.Debug)
+
+// Type aliases
+
+// Traits

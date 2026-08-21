@@ -10,13 +10,51 @@ import {
 // Values
 pub fn anchor(region~ : @scene.Rect, size~ : @core.Size, h_align~ : HorizontalAlign, v_align~ : VerticalAlign, margin~ : @core.EdgeInsets) -> @scene.Point
 
+pub fn content_region(@scene.Rect, @core.EdgeInsets) -> @scene.Rect
+
+pub fn distribute_horizontal(region~ : @scene.Rect, item_widths~ : Array[Int], alignment~ : FlowAlignment) -> Array[@scene.Rect]
+
+pub fn fit_rect(source~ : @core.Size, target~ : @scene.Rect, mode~ : @scene.ImageFit) -> @scene.Rect
+
 pub fn grid(region~ : @scene.Rect, spec~ : GridSpec) -> Array[@scene.Rect]
 
+pub fn layout_envelope(LayoutRequest) -> LayoutEnvelope
+
+pub fn layout_request_summary(LayoutRequest) -> String
+
+pub fn measure_grid(region~ : @scene.Rect, spec~ : GridSpec, constraints~ : @core.Constraints) -> LayoutResult
+
+pub fn measure_stack_vertical(region~ : @scene.Rect, item_heights~ : Array[Int], gap~ : Int, constraints~ : @core.Constraints) -> LayoutResult
+
+pub fn rect_overflow(@scene.Rect, @scene.Rect) -> @core.RectOverflow
+
+pub fn split_horizontal(@scene.Rect, Int) -> (@scene.Rect, @scene.Rect)
+
+pub fn split_vertical(@scene.Rect, Int) -> (@scene.Rect, @scene.Rect)
+
+pub fn stack_horizontal(region~ : @scene.Rect, item_widths~ : Array[Int], gap~ : Int) -> Array[@scene.Rect]
+
 pub fn stack_vertical(region~ : @scene.Rect, item_heights~ : Array[Int], gap~ : Int) -> Array[@scene.Rect]
+
+pub fn warning_code(LayoutWarning) -> String
+
+pub fn warnings_text(Array[LayoutWarning]) -> String
 
 // Errors
 
 // Types and methods
+pub(all) enum FlowAlignment {
+  Start
+  Center
+  End
+  SpaceBetween
+} derive(Eq, @debug.Debug)
+
+pub(all) enum FlowDirection {
+  Horizontal
+  Vertical
+} derive(Eq, @debug.Debug)
+
 pub(all) struct GridSpec {
   columns : Int
   rows : Int
@@ -29,6 +67,38 @@ pub(all) enum HorizontalAlign {
   Start
   Center
   End
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LayoutEnvelope {
+  content : @scene.Rect
+  requested : @core.Size
+  constrained : @core.Size
+  overflow : @core.RectOverflow
+  valid : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LayoutRequest {
+  region : @scene.Rect
+  min_width : Int
+  min_height : Int
+  max_width : Int
+  max_height : Int
+  gap : Int
+  padding : @core.EdgeInsets
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LayoutResult {
+  frames : Array[@scene.Rect]
+  warnings : Array[LayoutWarning]
+  used : @core.Size
+} derive(Eq, @debug.Debug)
+
+pub(all) enum LayoutWarning {
+  NegativeGap(value~ : Int)
+  NegativeHeight(index~ : Int, value~ : Int)
+  ClippedChild(index~ : Int, overflow~ : @core.RectOverflow)
+  EmptyRegion
+  InvalidGrid
 } derive(Eq, @debug.Debug)
 
 pub(all) enum VerticalAlign {

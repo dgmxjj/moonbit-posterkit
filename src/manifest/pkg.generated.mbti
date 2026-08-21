@@ -10,13 +10,30 @@ import {
 // Values
 pub fn build_catalog() -> RepositoryCatalog
 
+pub fn catalog_counts(RepositoryCatalog) -> CatalogCounts
+
+pub fn catalog_has_section(String, String) -> Bool
+
+pub fn catalog_is_complete(RepositoryCatalog) -> Bool
+
 pub fn catalog_json() -> String
 
 pub fn catalog_markdown() -> String
 
+pub fn catalog_markdown_sections() -> Array[String]
+
+pub fn catalog_summary(RepositoryCatalog) -> String
+
 // Errors
 
 // Types and methods
+pub(all) struct CatalogCounts {
+  templates : Int
+  presets : Int
+  themes : Int
+  packs : Int
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct RepositoryCatalog {
   module_name : String
   version : String

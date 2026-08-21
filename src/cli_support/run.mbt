@@ -117,13 +117,13 @@ fn run_benchmark(input : String, iterations : Int) -> Int {
               measured_bytes = measured_bytes + poster.svg.length()
             })
           }
-          println("Benchmark iterations: {iterations}")
+          println("Benchmark iterations: " + iterations.to_string())
           println("Jobs: " + metrics.total.to_string())
           println("Successful renders: " + metrics.succeeded.to_string())
           println(
             "SVG bytes per iteration: " + metrics.total_svg_bytes.to_string(),
           )
-          println("Measured bytes: {measured_bytes}")
+          println("Measured bytes: " + measured_bytes.to_string())
           0
         }
       }

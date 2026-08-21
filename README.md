@@ -1,101 +1,95 @@
 # moonbit-posterkit
 
-`moonbit-posterkit` 是一个面向 MoonBit 的数据驱动海报/封面生成工具库，核心关注点是：
+\`moonbit-posterkit\` is a typed, data-driven MoonBit toolkit for generating reusable SVG posters, covers, social cards, event graphics, quote cards, and campaign packs.
 
-- 可复用模板
-- 可枚举的预设、主题、样例包
-- 可批量验证与渲染的 JSON 配置
-- 适合测试、评审和自动化的稳定 SVG 输出
+It combines a small poster-oriented scene DSL, deterministic layout helpers, template registries, strict batch validation, SVG rendering, and a native CLI. The output is text-based, inspectable, diffable, and suitable for automation.
 
-它不重复造底层 SVG 或图形库，而是把这些能力向上收敛成更贴近实际业务的“海报 DSL + 模板系统 + CLI 流程”。
+## Features
 
-## 适合的场景
+- Typed \`PosterDocument\` and \`Element\` scene model
+- Square, story, thumbnail, Open Graph, print, portrait, and landscape presets
+- Warm editorial and Swiss grid themes with contrast reports
+- Vertical/horizontal stack, grid, anchor, split, and constraint-based layout helpers
+- CJK/Latin text wrapping, bounded measurement, line clamping, and truncation
+- Launch, editorial, event, quote, and digest templates
+- Campaign packs with catalog statistics and query helpers
+- Strict configuration validation, output planning, duplicate-path detection, and batch metrics
+- Deterministic SVG escaping, structural validation, render metrics, and snapshots
+- Native CLI for rendering, validation, inspection, batch generation, catalog export, and benchmark runs
 
-- 黑客松项目封面、发布图、社媒宣发卡片
-- 活动海报、工作坊卡片、报名视觉物料
-- 社区周报、版本更新、栏目摘要图
-- 需要“一份内容，多种尺寸，多张图自动产出”的项目
+## Quick start
 
-## 当前能力
+Install the current MoonBit stable toolchain, then run:
 
-- 5 套内置模板：`launch / editorial / event / quote / digest`
-- 3 套尺寸预设：`instagram-square / social-story / youtube-thumbnail`
-- 2 套主题：`warm-editorial / swiss-grid`
-- `Block / Text / ImageSlot` 场景 DSL
-- `stack / grid / anchor` 布局原语
-- 拉丁文与 CJK 文案换行辅助
-- 模板、预设、主题、样例包注册表
-- typed batch config -> validate -> render -> SVG
-- CLI 支持：
-  - `batch`
-  - `render`
-  - `validate`
-  - `emit-pack`
-  - `list-templates`
-  - `list-presets`
-  - `list-themes`
-  - `list-packs`
-  - `catalog-json`
-  - `catalog-md`
-
-## 本地命令
-
-```bash
+~~~bash
+moon install
 moon check --target all
 moon test --target all
-moon fmt --check
-moon info
 moon run --target native src/cli list-templates
 moon run --target native src/cli validate examples/batches/hackathon-showcase.json
 moon run --target native src/cli batch examples/batches/hackathon-showcase.json examples/rendered
-moon run --target native src/cli emit-pack quote-story-pack examples/batches/quote-story-pack.json
-```
+~~~
 
-## 目录结构
+Inspect and benchmark a batch:
 
-- `src/core`：基础类型
-- `src/theme`：主题、色板、字号、边距
-- `src/preset`：尺寸预设
-- `src/scene`：海报场景 DSL
-- `src/layout`：布局算法
-- `src/textflow`：文案换行与段落拆分
-- `src/svg`：SVG 渲染器
-- `src/template`：内置模板实现
-- `src/config`：批量配置解析、校验与渲染入口
-- `src/registry`：模板/预设/主题注册表
-- `src/catalog`：样例 campaign pack
-- `src/catalog_meta`：样例包清单与摘要
-- `src/manifest`：JSON/Markdown 目录导出
-- `src/cli_support`：可测试的 CLI 逻辑
-- `src/cli`：可执行入口
-- `examples/batches`：示例输入
-- `examples/rendered`：示例输出
+~~~bash
+moon run --target native src/cli inspect examples/batches/hackathon-showcase.json
+moon run --target native src/cli validate --strict examples/batches/hackathon-showcase.json
+moon run --target native src/cli benchmark examples/benchmarks/batch-10.json 3
+~~~
 
-## 与现有生态的关系
+## Package map
 
-在选题阶段已经检索过 MoonBit 生态关键词。当前生态里已经有 SVG、图形、布局或更底层的通用工具包，但缺少“海报/封面生成 DSL + 模板系统 + 批量配置渲染”这一层更贴近应用的成型工具。
+- \`src/core\`: shared geometry, constraints, and collection utilities
+- \`src/preset\`: output dimensions and orientation helpers
+- \`src/theme\`: colors, themes, contrast/accessibility reports
+- \`src/scene\`: typed elements, validation, analysis, and normalization
+- \`src/layout\`: grid, stack, anchor, flow, envelope, and overflow diagnostics
+- \`src/textflow\`: wrapping, measurement, truncation, and paragraph profiles
+- \`src/template\`: built-in templates, content profiles, and variants
+- \`src/registry\`: template/preset/theme metadata and search queries
+- \`src/config\`: JSON jobs, strict validation, batch metrics, and output plans
+- \`src/svg\`: deterministic SVG rendering, escaping, metrics, and structural checks
+- \`src/catalog\`: reusable campaign packs, statistics, and queries
+- \`src/manifest\`: JSON/Markdown catalog export and catalog helpers
+- \`src/cli_support\`: testable command parsing, filesystem operations, reports, and benchmark output
+- \`src/quality\`: document, SVG, and batch quality checklists
 
-`moonbit-posterkit` 的定位因此是：
+## Configuration
 
-- 不重写底层图形基础设施
-- 聚焦模板化视觉产物生成
-- 强调可测试、可审阅、可自动化
+Batch input is JSON with a \`jobs\` array. Each job selects a template, preset, theme, slug, and typed content fields. See \`examples/batches/\` for complete inputs and \`examples/rendered/\` for generated SVG output.
 
-## 质量约束
+The pipeline is:
 
-- 多包结构、职责分层清晰
-- `moon check --target all`
-- `moon test --target all`
-- `moon fmt --check`
-- `moon info`
-- CI 覆盖构建、测试、格式、接口生成和 CLI 烟测
-- `src/**/*.mbt` 与 `src/**/*.mbti` 当前规模已超过 4000 行
-- 来源说明单独记录在 `PROVENANCE.md`
+\`JSON -> typed batch -> strict validation -> output plan -> template -> scene -> layout -> SVG\`
 
-## 来源说明
+Image fields are explicit slots. The library does not download remote assets or embed unknown-origin binary files.
 
-本仓库围绕 MoonBit 黑客松需求独立设计与实现。开发过程中参考了 MoonBit 官方文档、MoonBit 社区工作流模板以及比赛说明，但没有挪用其它成熟 MoonBit 项目的现成业务实现。
+## Benchmarks
 
-## License
+Benchmark fixtures are committed under \`examples/benchmarks/\`. The CLI reports iteration count, job count, successful renders, SVG bytes per iteration, and measured repeated bytes. For wall-clock timings, run the command with the platform’s timing tool and record the exact MoonBit version and host. See [\`docs/benchmarks/README.md\`](docs/benchmarks/README.md).
 
-Apache-2.0
+The source scale is audited with a repository-local command and is not treated as a substitute for functionality. Test counts and performance numbers should always be taken from the command output of the current revision.
+
+## Testing and CI
+
+Local quality gates:
+
+~~~bash
+moon update
+moon check --deny-warn --target all
+moon test --deny-warn --target all
+moon fmt --check
+moon info
+~~~
+
+GitHub Actions runs the current stable MoonBit installer on Ubuntu, macOS, and Windows, then checks dependencies, all supported targets, formatting, generated interfaces, native coverage where the runner supports it, and CLI smoke paths. The publish workflow is manual and never stores credentials in the repository.
+
+## Provenance and license
+
+The implementation is MoonBit-first and uses repository-local deterministic examples. Source and asset provenance notes are maintained in [\`PROVENANCE.md\`](PROVENANCE.md). The project is licensed under Apache-2.0; see [\`LICENSE\`](LICENSE).
+
+## Contributing
+
+See [\`CONTRIBUTING.md\`](CONTRIBUTING.md) for development commands, test expectations, API compatibility guidance, and fixture rules.
+

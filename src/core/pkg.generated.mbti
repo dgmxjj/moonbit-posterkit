@@ -6,10 +6,35 @@ import {
 }
 
 // Values
+pub fn average_ints(Array[Int]) -> Int
+
+pub fn clamp_int(Int, Int, Int) -> Int
+
+pub fn join_non_empty(Array[String], String) -> String
+
+pub fn max_int(Array[Int]) -> Int?
+
+pub fn min_int(Array[Int]) -> Int?
+
+pub fn repeat_string(String, Int) -> String
+
+pub fn safe_filename(String, String) -> String
+
+pub fn sum_ints(Array[Int]) -> Int
 
 // Errors
 
 // Types and methods
+pub(all) struct Constraints {
+  min_width : Int
+  max_width : Int
+  min_height : Int
+  max_height : Int
+} derive(Eq, @debug.Debug)
+pub fn Constraints::constrain(Self, Size) -> Size
+pub fn Constraints::tight(Size) -> Self
+pub fn Constraints::unbounded() -> Self
+
 pub(all) struct EdgeInsets {
   top : Int
   right : Int
@@ -19,10 +44,18 @@ pub(all) struct EdgeInsets {
 pub fn EdgeInsets::all(Int) -> Self
 pub fn EdgeInsets::zero() -> Self
 
+pub(all) struct RectOverflow {
+  left : Int
+  top : Int
+  right : Int
+  bottom : Int
+} derive(Eq, @debug.Debug)
+
 pub(all) struct Size {
   width : Int
   height : Int
 } derive(Eq, @debug.Debug)
+pub fn Size::non_negative(Self) -> Self
 pub fn Size::square(Int) -> Self
 
 // Type aliases

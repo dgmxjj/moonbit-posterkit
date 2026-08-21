@@ -9,6 +9,10 @@ import {
 // Values
 pub fn all_packs() -> Array[CampaignPack]
 
+pub fn catalog_job_count() -> Int
+
+pub fn catalog_template_count() -> Int
+
 pub fn community_pack() -> CampaignPack
 
 pub fn conference_pack() -> CampaignPack
@@ -18,6 +22,12 @@ pub fn education_pack() -> CampaignPack
 pub fn flatten_jobs(CampaignPack) -> @config.BatchJob
 
 pub fn hackathon_pack() -> CampaignPack
+
+pub fn pack_statistics(CampaignPack) -> PackStatistics
+
+pub fn packs_with_preset(String) -> Array[CampaignPack]
+
+pub fn packs_with_template(String) -> Array[CampaignPack]
 
 pub fn product_launch_pack() -> CampaignPack
 
@@ -37,6 +47,16 @@ pub(all) struct CampaignPack {
   description : String
   jobs : Array[@config.PosterJob]
 } derive(Eq, @debug.Debug)
+
+pub(all) struct PackStatistics {
+  name : String
+  jobs : Int
+  templates : Array[String]
+  presets : Array[String]
+  themes : Array[String]
+  total_title_characters : Int
+  image_slots : Int
+} derive(Eq, ToJson, @debug.Debug)
 
 // Type aliases
 

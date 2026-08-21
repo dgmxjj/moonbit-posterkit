@@ -1,0 +1,18 @@
+{
+  "jobs": [
+    {
+      "slug": "benchmark-launch-01",
+      "template": "launch",
+      "preset": "instagram-square",
+      "theme": "warm-editorial",
+      "content": {"eyebrow":"Benchmark","title":"Deterministic poster rendering","subtitle":"A repeatable SVG workload","body":"Measure templates, layout, text flow, validation, and stable output.","cta":"Run benchmark","footer":"moonbit-posterkit","image_label":"Benchmark image","image_asset_id":"benchmark-01"}
+    },
+    {
+      "slug": "benchmark-editorial-02",
+      "template": "editorial",
+      "preset": "social-story",
+      "theme": "swiss-grid",
+      "content": {"eyebrow":"CJK 混排","title":"MoonBit 海报系统","subtitle":"Latin and 中文 text flow","body":"A fixed fixture keeps benchmark comparisons reproducible across revisions.","cta":"Inspect output","footer":"benchmark / editorial","image_label":"Story image","image_asset_id":"benchmark-02"}
+    }
+  ]
+}

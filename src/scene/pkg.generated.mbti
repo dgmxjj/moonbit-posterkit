@@ -9,10 +9,48 @@ import {
 }
 
 // Values
+pub fn analyze_document(PosterDocument) -> DocumentStats
+
+pub fn diagnostic_code(SceneDiagnostic) -> String
+
+pub fn document_without_empty_text(PosterDocument) -> PosterDocument
+
+pub fn element_ids(PosterDocument) -> Array[String]
+
+pub fn element_ids_sorted(PosterDocument) -> Array[String]
+
+pub fn find_element(PosterDocument, String) -> Element?
+
+pub fn image_slot_count(PosterDocument) -> Int
+
+pub fn normalization_summary(PosterDocument) -> String
+
+pub fn normalize_document_ids(PosterDocument) -> PosterDocument
+
+pub fn normalize_for_render(PosterDocument) -> PosterDocument
+
+pub fn normalized_id(String, String) -> String
+
+pub fn normalized_title(PosterDocument, String) -> String
+
+pub fn text_character_count(PosterDocument) -> Int
+
+pub fn validate_document(PosterDocument, strict~ : Bool) -> Array[SceneDiagnostic]
 
 // Errors
 
 // Types and methods
+pub(all) struct DocumentStats {
+  element_count : Int
+  block_count : Int
+  text_count : Int
+  image_slot_count : Int
+  text_characters : Int
+  occupied_area : Int
+  ids : Array[String]
+} derive(Eq, @debug.Debug)
+pub fn DocumentStats::empty() -> Self
+
 pub(all) enum Element {
   Block(id~ : String, rect~ : Rect, fill~ : @theme.Color, radius~ : Int)
   Text(id~ : String, content~ : String, position~ : Point, style~ : TextStyle, max_width~ : Int)
@@ -47,6 +85,16 @@ pub(all) struct Rect {
   height : Int
 } derive(Eq, @debug.Debug)
 pub fn Rect::inset(Self, @core.EdgeInsets) -> Self
+
+pub(all) enum SceneDiagnostic {
+  EmptyTitle
+  EmptyElementId(index~ : Int)
+  DuplicateElementId(id~ : String)
+  InvalidRect(id~ : String)
+  EmptyAssetId(id~ : String)
+  EmptyImageLabel(id~ : String)
+  TextOutsideCanvas(id~ : String)
+} derive(Eq, @debug.Debug)
 
 pub(all) enum TextAlign {
   Left

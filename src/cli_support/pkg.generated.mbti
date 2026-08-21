@@ -7,6 +7,12 @@ import {
 }
 
 // Values
+pub fn batch_report(input~ : String, output_directory~ : String, @config.BatchJob) -> CliBatchReport
+
+pub fn batch_report_json(CliBatchReport) -> String
+
+pub fn batch_report_text(CliBatchReport) -> String
+
 pub fn catalog_json_output() -> String
 
 pub fn catalog_markdown_output() -> String
@@ -34,10 +40,23 @@ pub fn validation_output(@config.ValidationSummary) -> String
 // Errors
 
 // Types and methods
+pub(all) struct CliBatchReport {
+  input : String
+  jobs : Int
+  valid : Bool
+  templates : Array[String]
+  presets : Array[String]
+  themes : Array[String]
+  output_directory : String
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) enum CliCommand {
   Batch(input~ : String, output_dir~ : String)
   Render(input~ : String, output_file~ : String)
   Validate(input~ : String)
+  ValidateStrict(input~ : String)
+  Inspect(input~ : String)
+  Benchmark(input~ : String, iterations~ : Int)
   EmitPack(name~ : String, output_file~ : String)
   ListTemplates
   ListPresets
