@@ -4,6 +4,10 @@ fn command_text(result : Result[CliCommand, CliError]) -> String {
     Ok(CliCommand::Batch(input~, output_dir~)) => input + "|" + output_dir
     Ok(CliCommand::Render(input~, output_file~)) => input + "|" + output_file
     Ok(CliCommand::Validate(input~)) => input
+    Ok(CliCommand::ValidateStrict(input~)) => "strict:" + input
+    Ok(CliCommand::Inspect(input~)) => "inspect:" + input
+    Ok(CliCommand::Benchmark(input~, iterations~)) =>
+      "benchmark:" + input + ":" + iterations.to_string()
     Ok(CliCommand::EmitPack(name~, output_file~)) => name + "|" + output_file
     Ok(CliCommand::ListTemplates) => "list-templates"
     Ok(CliCommand::ListPresets) => "list-presets"
@@ -38,6 +42,24 @@ test "parse_command supports subcommands for render and emit-pack" {
       parse_command(["posterkit", "emit-pack", "hackathon-showcase", "out.json"]),
     ),
     content="hackathon-showcase|out.json",
+  )
+}
+
+///|
+test "parse_command supports strict validation inspection and benchmark" {
+  inspect(
+    command_text(
+      parse_command(["posterkit", "validate", "--strict", "input.json"]),
+    ),
+    content="strict:input.json",
+  )
+  inspect(
+    command_text(parse_command(["posterkit", "inspect", "input.json"])),
+    content="inspect:input.json",
+  )
+  inspect(
+    command_text(parse_command(["posterkit", "benchmark", "input.json", "3"])),
+    content="benchmark:input.json:3",
   )
 }
 

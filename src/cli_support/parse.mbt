@@ -4,6 +4,31 @@ fn looks_like_batch_invocation(args : Array[String]) -> Bool {
 }
 
 ///|
+fn parse_digits(chars : Array[Char], index : Int, value : Int) -> Int? {
+  if index >= chars.length() {
+    Some(value)
+  } else {
+    match chars[index] {
+      '0'..='9' =>
+        parse_digits(
+          chars,
+          index + 1,
+          value * 10 + chars[index].to_int() - '0'.to_int(),
+        )
+      _ => None
+    }
+  }
+}
+
+///|
+fn parse_positive_int(raw : String) -> Int? {
+  match parse_digits(raw.to_array(), 0, 0) {
+    Some(value) if value > 0 => Some(value)
+    _ => None
+  }
+}
+
+///|
 pub fn parse_command(args : Array[String]) -> Result[CliCommand, CliError] {
   if args.length() <= 1 {
     Err(CliError::Usage)
@@ -24,8 +49,28 @@ pub fn parse_command(args : Array[String]) -> Result[CliCommand, CliError] {
           Err(CliError::Usage)
         }
       "validate" =>
-        if args.length() == 3 {
+        if args.length() == 4 && args[2] == "--strict" {
+          Ok(CliCommand::ValidateStrict(input=args[3]))
+        } else if args.length() == 3 {
           Ok(CliCommand::Validate(input=args[2]))
+        } else {
+          Err(CliError::Usage)
+        }
+      "inspect" =>
+        if args.length() == 3 {
+          Ok(CliCommand::Inspect(input=args[2]))
+        } else {
+          Err(CliError::Usage)
+        }
+      "benchmark" =>
+        if args.length() == 3 {
+          Ok(CliCommand::Benchmark(input=args[2], iterations=1))
+        } else if args.length() == 4 {
+          match parse_positive_int(args[3]) {
+            Some(iterations) if iterations > 0 =>
+              Ok(CliCommand::Benchmark(input=args[2], iterations~))
+            _ => Err(CliError::Usage)
+          }
         } else {
           Err(CliError::Usage)
         }

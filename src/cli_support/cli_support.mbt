@@ -3,6 +3,9 @@ pub(all) enum CliCommand {
   Batch(input~ : String, output_dir~ : String)
   Render(input~ : String, output_file~ : String)
   Validate(input~ : String)
+  ValidateStrict(input~ : String)
+  Inspect(input~ : String)
+  Benchmark(input~ : String, iterations~ : Int)
   EmitPack(name~ : String, output_file~ : String)
   ListTemplates
   ListPresets
@@ -28,6 +31,9 @@ pub fn usage() -> String {
     #|  posterkit batch <input.json> <output-dir>
     #|  posterkit render <job.json> <output.svg>
     #|  posterkit validate <input.json>
+    #|  posterkit validate --strict <input.json>
+    #|  posterkit inspect <input.json>
+    #|  posterkit benchmark <input.json> [iterations]
     #|  posterkit emit-pack <pack-name> <output.json>
     #|  posterkit list-templates
     #|  posterkit list-presets
