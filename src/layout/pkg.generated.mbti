@@ -40,4 +40,3 @@ pub(all) enum VerticalAlign {
 // Type aliases
 
 // Traits
-

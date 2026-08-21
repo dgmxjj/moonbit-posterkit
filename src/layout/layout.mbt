@@ -98,3 +98,16 @@ pub fn anchor(
     resolve_y(inner, size.height, v_align),
   )
 }
+
+///|
+pub fn rect_overflow(
+  rect : @scene.Rect,
+  region : @scene.Rect,
+) -> @core.RectOverflow {
+  {
+    left: Int::max(region.x - rect.x, 0),
+    top: Int::max(region.y - rect.y, 0),
+    right: Int::max(rect.x + rect.width - region.x - region.width, 0),
+    bottom: Int::max(rect.y + rect.height - region.y - region.height, 0),
+  }
+}
