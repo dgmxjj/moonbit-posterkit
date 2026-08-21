@@ -28,4 +28,3 @@ pub fn Size::square(Int) -> Self
 // Type aliases
 
 // Traits
-
